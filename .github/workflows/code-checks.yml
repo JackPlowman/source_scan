@@ -1,4 +1,4 @@
-name: "Code Quality"
+name: "Run Code Checks"
 
 on:
   push:
@@ -73,6 +73,28 @@ jobs:
         with:
           sarif_file: ruff-results.sarif
           wait-for-processing: true
+
+  unit-test:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4.2.2
+
+      - name: Setup Python Dependencies
+        uses: ./.github/actions/setup-dependencies
+
+      - name: Run Unit Tests
+        run: just unit-test
+
+      - name: Override Coverage Source Path for SonarCloud
+        run: sed -i "s/<source>\/home\/runner\/work\/source_scan\/source_scan<\/source>/<source>\/github\/workspace<\/source>/g" /home/runner/work/source_scan/source_scan/coverage.xml
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v3.1.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   run-codeql-analysis:
     name: CodeQL Analysis
