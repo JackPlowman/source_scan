@@ -2,7 +2,7 @@
 
 This project was built using the following technologies and frameworks:
 
-| Catagory | Technologies and Frameworks                                                                                                                                                                                                                             |
+| Category | Technologies and Frameworks                                                                                                                                                                                                                             |
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Frontend | ![Markdown](https://img.shields.io/badge/markdown-%23000000.svg?style=for-the-badge&logo=markdown&logoColor=white)                                                                                                                                      |
 | Backend  | ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Poetry](https://img.shields.io/badge/poetry-%23150458.svg?style=for-the-badge&logo=poetry&logoColor=white)                                     |
