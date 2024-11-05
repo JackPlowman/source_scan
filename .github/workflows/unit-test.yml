@@ -20,4 +20,4 @@ jobs:
         uses: ./.github/actions/setup-dependencies
 
       - name: Run Unit Tests
-        run: just unit test
+        run: just unit-test
