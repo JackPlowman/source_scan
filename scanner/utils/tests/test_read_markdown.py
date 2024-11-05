@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from source_scan.scanner.utils.markdown import (
+from source_scan.scanner.utils.read_markdown import (
     find_markdown_badges,
     find_project_technologies_and_frameworks_header,
     find_table_data_start_index,
