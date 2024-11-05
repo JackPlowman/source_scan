@@ -2,9 +2,9 @@ from unittest.mock import MagicMock, call, patch
 
 from github import GithubException
 
-from detector.application.utils.github_interactions import retrieve_repositories, scrape_technologies
+from scanner.utils.github_interactions import retrieve_repositories, scrape_technologies
 
-FILE_PATH = "detector.application.utils.github_interactions"
+FILE_PATH = "scanner.utils.github_interactions"
 
 
 @patch(f"{FILE_PATH}.Github")

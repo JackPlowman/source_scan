@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from detector.application.utils.output_file import generate_output_file
+from scanner.utils.output_file import generate_output_file
 
 
 def test_generate_output_file() -> None:
