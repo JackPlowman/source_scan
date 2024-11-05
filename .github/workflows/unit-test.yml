@@ -19,5 +19,5 @@ jobs:
       - name: Setup Python Dependencies
         uses: ./.github/actions/setup-dependencies
 
-      - name: Unit Test
-        run: just test
+      - name: Run Unit Tests
+        run: just unit test
