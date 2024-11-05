@@ -1,4 +1,4 @@
-from scanner.utils.custom_logging import set_up_custom_logging
+from source_scan.scanner.utils.custom_logging import set_up_custom_logging
 
 
 def test_set_up_custom_logging() -> None:
