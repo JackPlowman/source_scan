@@ -51,7 +51,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Python Dependencies
-        uses: ./.github/actions/setup-python-dependencies
+        uses: ./.github/actions/setup-dependencies
 
       - name: Check Python Code for Dead Code (Vulture)
         run: just detector::vulture
