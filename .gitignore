@@ -157,3 +157,5 @@ cython_debug/
 # Custom
 ruff_cache/
 
+# Markdown
+tech_report.md
