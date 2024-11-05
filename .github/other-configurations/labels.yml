@@ -32,7 +32,7 @@
 # Release Please
 - color: ededed
   name: "autorelease: pending"
-  description:
+  description: The release is pending and awaiting further actions
 - color: ededed
   name: "autorelease: tagged"
   description:
