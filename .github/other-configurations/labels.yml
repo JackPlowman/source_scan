@@ -1,0 +1,90 @@
+# Default GitHub labels
+- color: d73a4a
+  name: bug
+  description: Something isn't working
+- color: 0075ca
+  name: documentation
+  description: Improvements or additions to documentation
+- color: 0366d6
+  name: dependencies
+  description: Pull requests that update a dependency file
+- color: cfd3d7
+  name: duplicate
+  description: This issue or pull request already exists
+- color: a2eeef
+  name: enhancement
+  description: Functionality that enhances existing features
+- color: 7057ff
+  name: good first issue
+  description: Good for newcomers
+- color: 008672
+  name: help wanted
+  description: We are looking for community help
+- color: e4e669
+  name: invalid
+  description: This doesn't seem right
+- color: d876e3
+  name: question
+  description: Further information is requested
+- color: d876e3
+  name: wontfix
+  description: The issue is expected and will not be fixed
+# Release Please
+- color: ededed
+  name: "autorelease: pending"
+  description:
+- color: ededed
+  name: "autorelease: tagged"
+  description:
+- color: ededed
+  name: "autorelease: triggered"
+  description:
+- color: ededed
+  name: "autorelease: snapshot"
+  description:
+- color: ededed
+  name: "autorelease: published"
+  description:
+# Languages
+- color: 2b67c6
+  name: python
+  description: Pull requests that update Python code
+- color: 000000
+  name: github_actions
+  description: Pull requests that update GitHub Actions code
+- color: 66A615
+  name: just
+  description: Pull requests that update Just code
+- color: 00ff44
+  name: shell
+  description: Pull requests that update Shell code
+# Custom
+- color: 00f2de
+  name: end-to-end-tests
+  description: Pull requests that update end to end tests
+# Components
+- color: f27100
+  name: scanner
+  description: Pull requests that update scanner code
+- color: ff0073
+  name: git_hooks
+  description: Pull requests that update git hooks
+# Sizes
+- color: 00ff22
+  name: size/XS
+  description: Extra Small Pull Request
+- color: 03a319
+  name: size/S
+  description: Small Pull Request
+- color: f2bb05
+  name: size/M
+  description: Medium Pull Request
+- color: fc7e08
+  name: size/L
+  description: Large Pull Request
+- color: ad2e03
+  name: size/XL
+  description: Extra Large Pull Request
+- color: 751f01
+  name: size/XXL
+  description: Extra Extra Large Pull Request
