@@ -1,4 +1,4 @@
-# Project Technologies
+# Project Technologies and Frameworks
 
 This project was built using the following technologies and frameworks:
 
