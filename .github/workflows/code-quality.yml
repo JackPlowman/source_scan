@@ -41,6 +41,40 @@ jobs:
           VALIDATE_PYTHON_RUFF: false
           VALIDATE_PYTHON_PYINK: false
 
+  check-python-code-format-and-quality:
+    name: Check Python Code Format and Quality
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python Dependencies
+        uses: ./.github/actions/setup-python-dependencies
+
+      - name: Check Python Code for Dead Code (Vulture)
+        run: just detector::vulture
+
+      - name: Check Python Code Format (Ruff)
+        run: just ruff-format
+        env:
+          RUFF_OUTPUT_FORMAT: "github"
+
+      - name: Check Python Code Quality (Ruff)
+        run: just ruff-lint
+        env:
+          RUFF_OUTPUT_FORMAT: "sarif"
+          RUFF_OUTPUT_FILE: "ruff-results.sarif"
+        continue-on-error: true
+
+      - name: Upload analysis results to GitHub
+        uses: github/codeql-action/upload-sarif@v3.27.0
+        with:
+          sarif_file: ruff-results.sarif
+          wait-for-processing: true
+
+
   run-codeql-analysis:
     name: CodeQL Analysis
     runs-on: ubuntu-latest
