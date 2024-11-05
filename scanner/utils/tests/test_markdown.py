@@ -12,14 +12,14 @@ from source_scan.scanner.utils.markdown import (
 
 def test_find_technologies_and_frameworks() -> None:
     # Arrange
-    with Path.open("../README.md") as file:
+    with Path.open("PROJECT_TECHNOLOGIES.md") as file:
         file_contents = file.read()
 
     # Act
     technologies_and_frameworks = find_technologies_and_frameworks(file_contents)
 
     # Assert
-    assert technologies_and_frameworks == ["TypeScript", "Astro", "Python", "Poetry", "Dependabot", "GitHub Actions"]
+    assert technologies_and_frameworks == ["Markdown", "Python", "Poetry", "Dependabot", "GitHub Actions"]
 
 
 @pytest.mark.parametrize(

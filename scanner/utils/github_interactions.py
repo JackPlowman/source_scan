@@ -44,19 +44,13 @@ def scrape_technologies(repository: Repository) -> ProjectTechnologiesAndFramewo
         "project_name": repository.full_name,
         "technologies_and_frameworks": [],
     }
-    expected_files = [
-        "README.md",
-        "PROJECT_TECHNOLOGIES.md",
-    ]  # Ordered in most common to least common
-    for expected_file in expected_files:
-        try:
-            file = repository.get_contents(expected_file)
-            logger.debug("Found file", file=file.name, repository=repository.full_name)
-            project_technologies_and_frameworks["technologies_and_frameworks"] = find_technologies_and_frameworks(
-                file.decoded_content.decode()
-            )
-            return project_technologies_and_frameworks  # noqa: TRY300
-        except GithubException:
-            logger.debug("No file found", repository=repository.full_name)
-    logger.debug("No Readme files found", repository=repository.full_name)
+    try:
+        file = repository.get_contents("PROJECT_TECHNOLOGIES.md")
+        logger.debug("Found file", file=file.name, repository=repository.full_name)
+        project_technologies_and_frameworks["technologies_and_frameworks"] = find_technologies_and_frameworks(
+            file.decoded_content.decode()
+        )
+        return project_technologies_and_frameworks  # noqa: TRY300
+    except GithubException:
+        logger.debug("No file found", repository=repository.full_name)
     return project_technologies_and_frameworks
