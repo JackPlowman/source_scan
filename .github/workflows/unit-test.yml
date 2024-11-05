@@ -1,0 +1,24 @@
+name: "Code Testing"
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+
+jobs:
+  unit-test:
+    name: Unit Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4.2.2
+
+      - name: Setup Python Dependencies
+        uses: ./.github/actions/setup-dependencies
+
+      - name: Unit Test
+        run: just test
