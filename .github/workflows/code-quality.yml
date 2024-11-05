@@ -54,7 +54,7 @@ jobs:
         uses: ./.github/actions/setup-dependencies
 
       - name: Check Python Code for Dead Code (Vulture)
-        run: just detector::vulture
+        run: just vulture
 
       - name: Check Python Code Format (Ruff)
         run: just ruff-format
