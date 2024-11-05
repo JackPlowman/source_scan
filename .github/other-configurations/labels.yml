@@ -35,16 +35,16 @@
   description: The release is pending and awaiting further actions
 - color: ededed
   name: "autorelease: tagged"
-  description:
+  description: The release has been tagged
 - color: ededed
   name: "autorelease: triggered"
-  description:
+  description: A release has been triggered but not yet completed
 - color: ededed
   name: "autorelease: snapshot"
-  description:
+  description: A snapshot release that is not intended for production
 - color: ededed
   name: "autorelease: published"
-  description:
+  description: A release has been published
 # Languages
 - color: 2b67c6
   name: python
