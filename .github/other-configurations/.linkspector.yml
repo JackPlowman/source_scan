@@ -1,0 +1,4 @@
+dirs:
+  - ./
+aliveStatusCodes:
+  - 200
