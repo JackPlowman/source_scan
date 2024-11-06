@@ -34,7 +34,7 @@ jobs:
         run: mkdir -p pages
 
       - name: Copy Files to GitHub Pages Directory
-        run: cp -r tech_report.md pages
+        run: cp -r tech_report.md pages/index.md
 
       - name: Upload GitHub Pages Directory
         uses: actions/upload-pages-artifact@v3.0.1
