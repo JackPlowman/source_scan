@@ -92,11 +92,11 @@ prettier-format:
 # ------------------------------------------------------------------------------
 
 # Format the Just code
-format:
+just-format:
     just --fmt --unstable
 
 # Check for Just format issues
-format-check:
+just-format-check:
     just --fmt --check --unstable
 
 # ------------------------------------------------------------------------------
