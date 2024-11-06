@@ -1,0 +1,54 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python Dependencies
+        uses: ./.github/actions/setup-dependencies
+
+      - name: Run Scanner
+        run: just run
+        env:
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+
+      - name: Make GitHub Pages Directory
+        run: mkdir -p pages
+
+      - name: Copy Files to GitHub Pages Directory
+        run: cp -r tech_report.md pages
+
+      - name: Upload GitHub Pages Directory
+        uses: actions/upload-pages-artifact@v3.0.1
+        with:
+          path: pages/
+
+  deploy:
+    needs: build
+    name: Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4.0.5
