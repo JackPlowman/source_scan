@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   build:
-    name: Build
+    name: Build GitHub Pages
     runs-on: ubuntu-latest
 
     steps:
