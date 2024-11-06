@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   build:
-    name: Build
+    name: Build GitHub Pages
     runs-on: ubuntu-latest
 
     steps:
@@ -30,16 +30,15 @@ jobs:
         env:
           GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
 
-      - name: Make GitHub Pages Directory
-        run: mkdir -p pages
+      - name: Build
+        uses: actions/jekyll-build-pages@v1.0.13
+        with:
+          destination: "./output"
 
-      - name: Copy Files to GitHub Pages Directory
-        run: cp -r tech_report.md pages/index.md
-
-      - name: Upload GitHub Pages Directory
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3.0.1
         with:
-          path: pages/
+          path: "./output"
 
   deploy:
     needs: build
