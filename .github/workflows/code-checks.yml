@@ -144,3 +144,18 @@ jobs:
           reporter: github-pr-review
           fail_on_error: true
           filter_mode: nofilter
+
+  check-justfile-format:
+    name: Check Justfile Format
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Just
+        uses: extractions/setup-just@v2
+
+      - name: Check Justfile Format
+        run: just just-format-check
