@@ -49,7 +49,7 @@ def test_find_table_data_start_index() -> None:
         "",
         "This project uses the following technologies and frameworks:",
         "",
-        "| Catagory | Technologies and Frameworks                                                                                                                                                                                                                             |",  # noqa: E501
+        "| Category | Technologies and Frameworks                                                                                                                                                                                                                             |",  # noqa: E501
         "| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |",  # noqa: E501
         "| Frontend | ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white) ![Astro](https://img.shields.io/badge/astro-%232C2052.svg?style=for-the-badge&logo=astro&logoColor=white)                      |",  # noqa: E501
         "| Backend  | ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Poetry](https://img.shields.io/badge/poetry-%23150458.svg?style=for-the-badge&logo=poetry&logoColor=white)                                     |",  # noqa: E501
