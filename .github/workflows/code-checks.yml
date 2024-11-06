@@ -126,3 +126,21 @@ jobs:
           queries: security-and-quality
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3.27.0
+
+  check-markdown-links:
+    name: Check Markdown links
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
+
+      - name: Check Markdown links
+        uses: UmbrellaDocs/action-linkspector@v1.2.2
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          config_file: .github/other-configurations/.linkspector.yml
+          reporter: github-pr-review
+          fail_on_error: true
+          filter_mode: nofilter
