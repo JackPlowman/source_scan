@@ -2,7 +2,10 @@ from unittest.mock import MagicMock, call, patch
 
 from github import GithubException
 
-from source_scan.scanner.utils.github_interactions import retrieve_repositories, scrape_technologies
+from source_scan.scanner.utils.github_interactions import (
+    retrieve_repositories,
+    scrape_technologies,
+)
 
 FILE_PATH = "source_scan.scanner.utils.github_interactions"
 

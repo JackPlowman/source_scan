@@ -19,7 +19,13 @@ def test_find_technologies_and_frameworks() -> None:
     technologies_and_frameworks = find_technologies_and_frameworks(file_contents)
 
     # Assert
-    assert technologies_and_frameworks == ["Markdown", "Python", "Poetry", "Dependabot", "GitHub Actions"]
+    assert technologies_and_frameworks == [
+        "Markdown",
+        "Python",
+        "Poetry",
+        "Dependabot",
+        "GitHub Actions",
+    ]
 
 
 @pytest.mark.parametrize(
@@ -32,7 +38,14 @@ def test_find_technologies_and_frameworks() -> None:
         (["##### Project Technologies and Frameworks"], 0),
         (["# Project Technologies and Frameworks", "This is a test line"], 0),
         (["This is a test line", "# Project Technologies and Frameworks"], 1),
-        (["This is a test line", "# Project Technologies and Frameworks", "This is another test line"], 1),
+        (
+            [
+                "This is a test line",
+                "# Project Technologies and Frameworks",
+                "This is another test line",
+            ],
+            1,
+        ),
     ],
 )
 def test_find_project_technologies_and_frameworks_header(lines: list[str], expected_index: int) -> None:
