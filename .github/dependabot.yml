@@ -11,9 +11,9 @@ updates:
       interval: "daily"
     target-branch: "main"
     groups:
-    github-actions:
-      patterns:
-        - "*"
+      github-actions:
+        patterns:
+          - "*"
 
   - package-ecosystem: "pip"
     directory: "/"
