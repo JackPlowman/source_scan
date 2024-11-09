@@ -17,7 +17,13 @@ def test_write_output_file(mock_open: MagicMock) -> None:
         "repositories": [
             {
                 "project_name": "JackPlowman/source_scan",
-                "technologies_and_frameworks": ["Markdown", "Python", "Poetry", "Dependabot", "GitHub Actions"],
+                "technologies_and_frameworks": [
+                    "Markdown",
+                    "Python",
+                    "Poetry",
+                    "Dependabot",
+                    "GitHub Actions",
+                ],
             },
         ],
     }

@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING
 from github import Github, GithubException, PaginatedList, Repository
 from structlog import get_logger, stdlib
 
-from .read_markdown import find_technologies_and_frameworks
+from scanner.utils.read_markdown import find_technologies_and_frameworks
 
 if TYPE_CHECKING:
     from .types import ProjectTechnologiesAndFrameworks

@@ -1,7 +1,7 @@
 from mdutils.mdutils import MdUtils
 from structlog import get_logger, stdlib
 
-from .types import TechReport
+from scanner.utils.types import TechReport
 
 logger: stdlib.BoundLogger = get_logger()
 
