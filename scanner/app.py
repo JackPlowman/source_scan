@@ -1,8 +1,8 @@
 from structlog import get_logger, stdlib
 
-from scanner.utils.github_interactions import retrieve_repositories, scrape_technologies
-from scanner.utils.types import ProjectTechnologiesAndFrameworks, TechReport
-from scanner.utils.write_markdown import write_output_file
+from .utils.github_interactions import retrieve_repositories, scrape_technologies
+from .utils.types import ProjectTechnologiesAndFrameworks, TechReport
+from .utils.write_markdown import write_output_file
 
 logger: stdlib.BoundLogger = get_logger()
 
