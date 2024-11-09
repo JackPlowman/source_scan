@@ -3,6 +3,7 @@
 ## Scanner Rules
 
 Allowed row names:
+
 - `Frontend`
 - `Backend`
 - `Database`
