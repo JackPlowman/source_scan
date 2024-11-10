@@ -2,16 +2,7 @@ name: "Pull Request Tasks"
 
 on:
   pull_request:
-    types:
-      [
-        opened,
-        edited,
-        unlocked,
-        labeled,
-        synchronize,
-        reopened,
-        ready_for_review,
-      ]
+    types: [opened, edited, synchronize]
 
 permissions:
   contents: read
