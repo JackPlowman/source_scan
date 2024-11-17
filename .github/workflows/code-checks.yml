@@ -39,6 +39,7 @@ jobs:
           VALIDATE_PYTHON_PYLINT: false
           VALIDATE_PYTHON_RUFF: false
           VALIDATE_PYTHON_PYINK: false
+
   check-python-code-format-and-quality:
     name: Check Python Code Format and Quality
     runs-on: ubuntu-latest
@@ -55,7 +56,6 @@ jobs:
         run: just ruff-format
         env:
           RUFF_OUTPUT_FORMAT: "github"
-
       - name: Check Python Code Quality (Ruff)
         run: just ruff-lint
         env:
@@ -145,8 +145,18 @@ jobs:
       - name: Check Justfile Format
         run: just just-format-check
 
-      - name: "Run Code Limit"
-        uses: getcodelimit/codelimit-action@8ee70f8d3d5b984130e46fb8ccbe229f5e1d68d0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          upload: true
+  run-code-limit:
+      name: Code Limit Analysis
+      runs-on: ubuntu-latest
+      permissions:
+        statuses: write
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4.2.2
+          with:
+            fetch-depth: 0
+        - name: "Run Code Limit"
+          uses: getcodelimit/codelimit-action@8ee70f8d3d5b984130e46fb8ccbe229f5e1d68d0
+          with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+            upload: true
