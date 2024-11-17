@@ -15,26 +15,21 @@ jobs:
   build:
     name: Build GitHub Pages
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
-
       - name: Setup Python Dependencies
         uses: ./.github/actions/setup-dependencies
-
       - name: Run Scanner
         run: just run
         env:
           GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
-
       - name: Build
         uses: actions/jekyll-build-pages@v1.0.13
         with:
           destination: "./output"
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3.0.1
         with:
