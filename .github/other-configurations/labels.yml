@@ -58,6 +58,9 @@
 - color: 00ff44
   name: shell
   description: Pull requests that update Shell code
+- color: 1900ff
+  name: markdown
+  description: Pull requests that update Markdown documentation
 # Custom
 - color: 00f2de
   name: end-to-end-tests
