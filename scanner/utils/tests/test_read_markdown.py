@@ -49,9 +49,7 @@ def test_find_technologies_and_frameworks() -> None:
         ),
     ],
 )
-def test_find_project_technologies_and_frameworks_header(
-    lines: list[str], expected_index: int
-) -> None:
+def test_find_project_technologies_and_frameworks_header(lines: list[str], expected_index: int) -> None:
     # Act
     response = find_project_technologies_and_frameworks_header(lines)
     # Assert
