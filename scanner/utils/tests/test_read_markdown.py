@@ -12,7 +12,7 @@ from source_scan.scanner.utils.read_markdown import (
 
 def test_find_technologies_and_frameworks() -> None:
     # Arrange
-    with Path.open("PROJECT_TECHNOLOGIES.md") as file:
+    with Path.open("docs/PROJECT_TECHNOLOGIES.md") as file:
         file_contents = file.read()
 
     # Act
@@ -25,6 +25,7 @@ def test_find_technologies_and_frameworks() -> None:
         "Poetry",
         "Dependabot",
         "GitHub Actions",
+        "GitHub Pages",
     ]
 
 

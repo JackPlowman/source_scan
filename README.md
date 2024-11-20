@@ -12,4 +12,4 @@ Allowed row names:
 
 All row names are case sensitive and optional.
 
-An example can be found in the [PROJECT_TECHNOLOGIES.md](./PROJECT_TECHNOLOGIES.md) file.
+An example can be found in the [PROJECT_TECHNOLOGIES.md](docs/PROJECT_TECHNOLOGIES.md) file.
