@@ -26,10 +26,12 @@ jobs:
         run: just run
         env:
           GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+      - name: Rename Scanner Results
+        run: mv tech_report.md index.md
       - name: Upload Scanner Results
         uses: actions/upload-artifact@v4.4.3
         with:
-          path: tech_report.md
+          path: index.md
           name: scanner-results
 
   build:
