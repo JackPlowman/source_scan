@@ -41,8 +41,6 @@ jobs:
         uses: actions/download-artifact@v4.1.8
         with:
           name: scanner-results
-      - name: Run LS
-        run: ls
       - name: Build
         uses: actions/jekyll-build-pages@v1.0.13
         with:
