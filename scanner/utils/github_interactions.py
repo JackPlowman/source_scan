@@ -45,12 +45,11 @@ def scrape_technologies(repository: Repository) -> ProjectTechnologiesAndFramewo
         "technologies_and_frameworks": [],
     }
     try:
-        file = repository.get_contents("PROJECT_TECHNOLOGIES.md")
+        file = repository.get_contents("docs/PROJECT_TECHNOLOGIES.md")
         logger.debug("Found file", file=file.name, repository=repository.full_name)
         project_technologies_and_frameworks["technologies_and_frameworks"] = find_technologies_and_frameworks(
             file.decoded_content.decode()
         )
-        return project_technologies_and_frameworks  # noqa: TRY300
     except GithubException:
         logger.debug("No file found", repository=repository.full_name)
     return project_technologies_and_frameworks
