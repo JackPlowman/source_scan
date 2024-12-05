@@ -28,6 +28,7 @@ jobs:
         run: just run
         env:
           GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+          FORCE_COLOR: true
       - name: Rename Scanner Results
         run: mv tech_report.md index.md
       - name: Upload Scanner Results
