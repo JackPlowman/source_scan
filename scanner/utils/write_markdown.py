@@ -1,3 +1,4 @@
+from os import environ
 from pathlib import Path
 from typing import Self
 
@@ -14,27 +15,31 @@ def write_output_file(tech_report: TechReport) -> None:
     Args:
         tech_report (TechReport): The tech report to write to a file.
     """
-    markdown_file = MarkdownFile(file_path="tech_report.md")
+    markdown_file = MarkdownFile()
     markdown_file.add_header(level=1, title="Tech Report")
     markdown_file.add_header(level=2, title="Summary")
     markdown_file.add_table(tech_report["summary"])
-    markdown_file.write()
+    markdown_file.write("tech_report.md")
+
+    if "GITHUB_STEP_SUMMARY" in environ:
+        logger.debug("Running in GitHub Actions, generating action summary")
+        markdown_file.write(environ["GITHUB_STEP_SUMMARY"])
+    else:
+        logger.debug("Not running in GitHub Actions, skipping generating action summary")
 
 
 class MarkdownFile:
     """Generate a markdown file."""
 
-    file_path: str
     lines_of_content: list[str]
 
-    def __init__(self: Self, file_path: str) -> None:
+    def __init__(self: Self) -> None:
         """Initialise the markdown file."""
-        self.file_path = file_path
         self.lines_of_content = []
 
-    def write(self: Self) -> None:
+    def write(self: Self, file_path: str) -> None:
         """Write the content to the markdown file."""
-        with Path(self.file_path).open("w", encoding="utf-8") as file:
+        with Path(file_path).open("w", encoding="utf-8") as file:
             file.writelines(self.lines_of_content)
 
     def _check_last_line_is_empty(self: Self) -> bool:
