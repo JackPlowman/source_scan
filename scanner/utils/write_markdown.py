@@ -49,12 +49,12 @@ class MarkdownFile:
 
     def add_paragraph(self: Self, paragraph: str) -> None:
         """Add a paragraph to the markdown file."""
-        self.lines_of_content.append(f"{paragraph}")
+        self.lines_of_content.append(f"{paragraph} \n\n")
 
     def add_table(self: Self, table_contents: list[dict]) -> None:
         """Add a table to the markdown file."""
         headers = table_contents[0].keys()
-        self.lines_of_content.append("| " + " | ".join(headers) + " |\n")
+        self.lines_of_content.append("|" + "|".join(headers) + "|\n")
         self.lines_of_content.append("|" + "|".join(["-" * len(header) for header in headers]) + "|\n")
         for row in table_contents:
             row_values = (str(value) for value in row.values())
