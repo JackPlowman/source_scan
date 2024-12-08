@@ -1,3 +1,4 @@
+from os import environ
 from unittest.mock import MagicMock, call, patch
 
 import pytest
@@ -34,34 +35,80 @@ def test_write_output_file(mock_markdown_file: MagicMock) -> None:
     # Act
     write_output_file(content)
     # Assert
-    mock_markdown_file.assert_called_once_with(file_path="tech_report.md")
+    mock_markdown_file.assert_called_once_with()
     mock_markdown_file.return_value.add_header.assert_has_calls(
         [
             call(level=1, title="Tech Report"),
             call(level=2, title="Summary"),
         ]
     )
-    mock_markdown_file.return_value.add_table.assert_called_once_with(content["summary"])
+    mock_markdown_file.return_value.add_table.assert_called_once_with(
+        content["summary"]
+    )
+    mock_markdown_file.return_value.write.assert_called_once_with("tech_report.md")
+
+
+@patch(f"{FILE_PATH}.MarkdownFile")
+def test_write_output_file__github_summary(mock_markdown_file: MagicMock) -> None:
+    # Arrange
+    content = {
+        "summary": [
+            {"technology": "Markdown", "count": 1},
+            {"technology": "Python", "count": 1},
+            {"technology": "Poetry", "count": 1},
+            {"technology": "Dependabot", "count": 1},
+            {"technology": "GitHub Actions", "count": 1},
+        ],
+        "repositories": [
+            {
+                "project_name": "JackPlowman/source_scan",
+                "technologies_and_frameworks": [
+                    "Markdown",
+                    "Python",
+                    "Poetry",
+                    "Dependabot",
+                    "GitHub Actions",
+                ],
+            },
+        ],
+    }
+    environ["GITHUB_STEP_SUMMARY"] = "test.md"
+    # Act
+    write_output_file(content)
+    # Assert
+    mock_markdown_file.assert_called_once_with()
+    mock_markdown_file.return_value.add_header.assert_has_calls(
+        [
+            call(level=1, title="Tech Report"),
+            call(level=2, title="Summary"),
+        ]
+    )
+    mock_markdown_file.return_value.add_table.assert_called_once_with(
+        content["summary"]
+    )
+    mock_markdown_file.return_value.write.assert_has_calls(
+        [call("tech_report.md"), call("test.md")]
+    )
+    # Cleanup
+    del environ["GITHUB_STEP_SUMMARY"]
 
 
 class TestMarkdownFile:
     def test_init(self) -> None:
-        # Arrange
-        file_path = "test.md"
         # Act
-        markdown_file = MarkdownFile(file_path)
+        markdown_file = MarkdownFile()
         # Assert
-        assert markdown_file.file_path == file_path
         assert markdown_file.lines_of_content == []
 
     @patch(f"{FILE_PATH}.Path")
     def test_write(self, mock_path: MagicMock) -> None:
         # Arrange
-        markdown_file = MarkdownFile(file_path="test.md")
+        markdown_file = MarkdownFile()
+        file_name = "test.md"
         # Act
-        markdown_file.write()
+        markdown_file.write(file_path=file_name)
         # Assert
-        mock_path.assert_called_once_with("test.md")
+        mock_path.assert_called_once_with(file_name)
         mock_path.return_value.open.assert_called_once_with("w", encoding="utf-8")
         mock_path.return_value.open.return_value.__enter__.return_value.writelines.assert_called_once_with(
             markdown_file.lines_of_content
@@ -76,9 +123,11 @@ class TestMarkdownFile:
             (["\n\n"], True),
         ],
     )
-    def test_check_last_line_is_empty(self, lines_of_content: list[str], expected_result: bool) -> None:
+    def test_check_last_line_is_empty(
+        self, lines_of_content: list[str], expected_result: bool
+    ) -> None:
         # Arrange
-        markdown_file = MarkdownFile(file_path="test.md")
+        markdown_file = MarkdownFile()
         markdown_file.lines_of_content = lines_of_content
         # Act
         response = markdown_file._check_last_line_is_empty()
@@ -101,7 +150,7 @@ class TestMarkdownFile:
         expected_result: list[str],
     ) -> None:
         # Arrange
-        markdown_file = MarkdownFile(file_path="test.md")
+        markdown_file = MarkdownFile()
         markdown_file.lines_of_content = lines_of_content
         # Act
         markdown_file.add_header(level, title)
@@ -115,9 +164,11 @@ class TestMarkdownFile:
             ("Test", ["Test \n\n"], ["Test \n\n", "Test \n\n"]),
         ],
     )
-    def test_add_paragraph(self, paragraph: str, lines_of_content: list[str], expected_result: list[str]) -> None:
+    def test_add_paragraph(
+        self, paragraph: str, lines_of_content: list[str], expected_result: list[str]
+    ) -> None:
         # Arrange
-        markdown_file = MarkdownFile(file_path="test.md")
+        markdown_file = MarkdownFile()
         markdown_file.lines_of_content = lines_of_content
         # Act
         markdown_file.add_paragraph(paragraph)
@@ -179,9 +230,11 @@ class TestMarkdownFile:
             ),
         ],
     )
-    def test_add_table(self, table_contents: list[dict], expected_result: list[str]) -> None:
+    def test_add_table(
+        self, table_contents: list[dict], expected_result: list[str]
+    ) -> None:
         # Arrange
-        markdown_file = MarkdownFile(file_path="test.md")
+        markdown_file = MarkdownFile()
         # Act
         markdown_file.add_table(table_contents)
         # Assert

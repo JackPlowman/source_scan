@@ -20,6 +20,7 @@ def write_output_file(tech_report: TechReport) -> None:
     markdown_file.add_header(level=2, title="Summary")
     markdown_file.add_table(tech_report["summary"])
     markdown_file.write("tech_report.md")
+
     if "GITHUB_STEP_SUMMARY" in environ:
         logger.debug("Running in GitHub Actions, generating action summary")
         markdown_file.write(environ["GITHUB_STEP_SUMMARY"])
