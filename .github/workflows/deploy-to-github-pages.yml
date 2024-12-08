@@ -45,6 +45,13 @@ jobs:
     needs: run-scanner
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+        with:
+          sparse-checkout: .github/github_pages_jekyll_config.yml
+          sparse-checkout-cone-mode: false
+      - name: Add Jekyll Config
+        run: mv .github/github_pages_jekyll_config.yml _config.yml
       - name: Get Scanner Results
         uses: actions/download-artifact@v4.1.8
         with:
