@@ -23,11 +23,13 @@ def write_output_file(tech_report: TechReport) -> None:
     for repository in tech_report["repositories"]:
         markdown_file.add_header(level=3, title=repository["project_name"])
         markdown_file.add_table(DataFrame(repository["technologies_and_frameworks"]))
+    markdown_file.write_to_file()
 
 
 class MarkdownFile:
     """Generate a markdown file."""
 
+    file_path: str
     lines_of_content: list[str]
 
     def __init__(self, file_path: str) -> None:
@@ -59,3 +61,8 @@ class MarkdownFile:
         logger.warning(dataframe.to_markdown(index=False))
         self.lines_of_content.append(dataframe.to_markdown(index=False))
         self.lines_of_content.append("")
+
+    def write_to_file(self) -> None:
+        """Write the content to the markdown file."""
+        with Path(self.file_path).open("w", encoding="utf-8") as file:
+            file.writelines(self.lines_of_content)
