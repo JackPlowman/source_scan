@@ -70,10 +70,10 @@ class MarkdownFile:
         """Add a table to the markdown file."""
         headers = table_contents[0].keys()
         self.lines_of_content.append("| " + " | ".join(headers) + " |")
-        self.lines_of_content.append("|".join(["-" * len(header) for header in headers]) + "|")
+        self.lines_of_content.append("|" + "|".join(["-" * len(header) for header in headers]) + "|")
         for row in table_contents:
             row_values = (str(value) for value in row.values())
-            self.lines_of_content.append("|".join(row_values) + "|")
+            self.lines_of_content.append("|" + "|".join(row_values) + "|")
         logger.warning(self.lines_of_content)
         # logger.warning(dataframe.to_markdown(index=False))
         # self.lines_of_content.append(dataframe.to_markdown(index=False))
