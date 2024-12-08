@@ -43,9 +43,7 @@ def test_write_output_file(mock_markdown_file: MagicMock) -> None:
             call(level=2, title="Summary"),
         ]
     )
-    mock_markdown_file.return_value.add_table.assert_called_once_with(
-        content["summary"]
-    )
+    mock_markdown_file.return_value.add_table.assert_called_once_with(content["summary"])
     mock_markdown_file.return_value.write.assert_called_once_with("tech_report.md")
 
 
@@ -84,12 +82,8 @@ def test_write_output_file__github_summary(mock_markdown_file: MagicMock) -> Non
             call(level=2, title="Summary"),
         ]
     )
-    mock_markdown_file.return_value.add_table.assert_called_once_with(
-        content["summary"]
-    )
-    mock_markdown_file.return_value.write.assert_has_calls(
-        [call("tech_report.md"), call("test.md")]
-    )
+    mock_markdown_file.return_value.add_table.assert_called_once_with(content["summary"])
+    mock_markdown_file.return_value.write.assert_has_calls([call("tech_report.md"), call("test.md")])
     # Cleanup
     del environ["GITHUB_STEP_SUMMARY"]
 
@@ -124,9 +118,7 @@ class TestMarkdownFile:
             (["\n\n"], True),
         ],
     )
-    def test_check_last_line_is_empty(
-        self, lines_of_content: list[str], expected_result: bool
-    ) -> None:
+    def test_check_last_line_is_empty(self, lines_of_content: list[str], expected_result: bool) -> None:
         # Arrange
         markdown_file = MarkdownFile()
         markdown_file.lines_of_content = lines_of_content
@@ -165,9 +157,7 @@ class TestMarkdownFile:
             ("Test", ["Test \n\n"], ["Test \n\n", "Test \n\n"]),
         ],
     )
-    def test_add_paragraph(
-        self, paragraph: str, lines_of_content: list[str], expected_result: list[str]
-    ) -> None:
+    def test_add_paragraph(self, paragraph: str, lines_of_content: list[str], expected_result: list[str]) -> None:
         # Arrange
         markdown_file = MarkdownFile()
         markdown_file.lines_of_content = lines_of_content
@@ -231,9 +221,7 @@ class TestMarkdownFile:
             ),
         ],
     )
-    def test_add_table(
-        self, table_contents: list[dict], expected_result: list[str]
-    ) -> None:
+    def test_add_table(self, table_contents: list[dict], expected_result: list[str]) -> None:
         # Arrange
         markdown_file = MarkdownFile()
         # Act
