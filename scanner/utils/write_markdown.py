@@ -9,7 +9,7 @@ from .types import TechReport
 logger: stdlib.BoundLogger = get_logger()
 
 
-def write_output_files(tech_report: TechReport) -> None:
+def write_output_file(tech_report: TechReport) -> None:
     """Write the tech report to a markdown file.
 
     Args:
