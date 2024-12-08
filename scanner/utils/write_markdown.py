@@ -72,7 +72,8 @@ class MarkdownFile:
         self.lines_of_content.append("| " + " | ".join(headers) + " |")
         self.lines_of_content.append("|".join(["-" * len(header) for header in headers]) + "|")
         for row in table_contents:
-            self.lines_of_content.append("|".join(row.values()) + "|")
+            row_values = (str(value) for value in row.values())
+            self.lines_of_content.append("|".join(row_values) + "|")
         logger.warning(self.lines_of_content)
         # logger.warning(dataframe.to_markdown(index=False))
         # self.lines_of_content.append(dataframe.to_markdown(index=False))
