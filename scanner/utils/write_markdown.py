@@ -18,11 +18,13 @@ def write_output_file(tech_report: TechReport) -> None:
     markdown_file = MarkdownFile(file_path="tech_report.md")
     markdown_file.add_header(level=1, title="Tech Report")
     markdown_file.add_paragraph("""
-| Category       | Technologies and Frameworks                                                                                                                                                                                                                                                                                                                                                 |
-| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Frontend       | ![Markdown](https://img.shields.io/badge/markdown-%23000000.svg?style=for-the-badge&logo=markdown&logoColor=white)                                                                                                                                                                                                                                                          |
-| Backend        | ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Poetry](https://img.shields.io/badge/poetry-%23150458.svg?style=for-the-badge&logo=poetry&logoColor=white)                                                                                                                                                         |
-| DevOps & CI/CD | ![Dependabot](https://img.shields.io/badge/dependabot-025E8C?style=for-the-badge&logo=dependabot&logoColor=white) ![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white) ![GitHub Pages](https://img.shields.io/badge/github%20pages-121013?style=for-the-badge&logo=github&logoColor=white) |
+                                
+| Priority apples | Second priority | Third priority |
+|-------|--------|---------|
+| ambrosia | gala | red delicious |
+| pink lady | jazz | macintosh |
+| honeycrisp | granny smith | fuji |
+
 """)
     markdown_file.add_header(level=2, title="Summary")
     logger.warning(DataFrame(tech_report["summary"]).to_markdown(index=False))
