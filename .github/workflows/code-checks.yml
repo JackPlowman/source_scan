@@ -147,7 +147,7 @@ jobs:
 
   run-code-limit:
     name: Run Code Limit
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20
     permissions:
       contents: write
       pull-requests: write
