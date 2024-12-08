@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Self
 
 from pandas import DataFrame
 from structlog import get_logger, stdlib
@@ -23,7 +24,7 @@ def write_output_file(tech_report: TechReport) -> None:
     for repository in tech_report["repositories"]:
         markdown_file.add_header(level=3, title=repository["project_name"])
         markdown_file.add_table(DataFrame(repository["technologies_and_frameworks"]))
-    markdown_file.write_to_file()
+    markdown_file.write()
 
 
 class MarkdownFile:
@@ -32,37 +33,32 @@ class MarkdownFile:
     file_path: str
     lines_of_content: list[str]
 
-    def __init__(self, file_path: str) -> None:
+    def __init__(self: Self, file_path: str) -> None:
         """Initialise the markdown file."""
         self.file_path = file_path
         self.lines_of_content = []
 
-    def write(self, content: str) -> None:
+    def write(self: Self) -> None:
         """Write the content to the markdown file."""
         with Path(self.file_path).open("w", encoding="utf-8") as file:
-            file.writelines(content)
+            file.writelines(self.lines_of_content)
 
-    def _check_last_line_is_empty(self) -> bool:
+    def _check_last_line_is_empty(self: Self) -> bool:
         """Check if the last line is empty."""
         return self.lines_of_content[-1] == ""
 
-    def add_header(self, level: int, title: str) -> None:
+    def add_header(self: Self, level: int, title: str) -> None:
         """Add a header to the markdown file."""
         if self.lines_of_content and not self._check_last_line_is_empty():
             self.lines_of_content.append("")
         self.lines_of_content += [f"{'#' * level} {title}", ""]
 
-    def add_paragraph(self, paragraph: str) -> None:
+    def add_paragraph(self: Self, paragraph: str) -> None:
         """Add a paragraph to the markdown file."""
         self.lines_of_content.append(f"{paragraph}")
 
-    def add_table(self, dataframe: DataFrame) -> None:
+    def add_table(self: Self, dataframe: DataFrame) -> None:
         """Add a table to the markdown file."""
         logger.warning(dataframe.to_markdown(index=False))
         self.lines_of_content.append(dataframe.to_markdown(index=False))
         self.lines_of_content.append("")
-
-    def write_to_file(self) -> None:
-        """Write the content to the markdown file."""
-        with Path(self.file_path).open("w", encoding="utf-8") as file:
-            file.writelines(self.lines_of_content)
