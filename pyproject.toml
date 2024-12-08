@@ -3,15 +3,14 @@ package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.13"
-poetry = "1.8.4"
 structlog = "24.4.0"
-pygithub = "2.4.0"
+pygithub = "2.5.0"
 
 
 [tool.poetry.group.dev.dependencies]
-pytest = "8.3.3"
+pytest = "8.3.4"
 pytest-cov = "6.0.0"
-ruff = "0.8.0"
+ruff = "0.8.2"
 vulture = "2.13"
 
 [build-system]
