@@ -16,23 +16,8 @@ def write_output_file(tech_report: TechReport) -> None:
     """
     markdown_file = MarkdownFile(file_path="tech_report.md")
     markdown_file.add_header(level=1, title="Tech Report")
-    #     markdown_file.add_paragraph("""
-
-    # | Priority apples | Second priority | Third priority |
-    # |-------|--------|---------|
-    # | ambrosia | gala | red delicious |
-    # | pink lady | jazz | macintosh |
-    # | honeycrisp | granny smith | fuji |
-
-    # """)
     markdown_file.add_header(level=2, title="Summary")
-    logger.warning(tech_report["summary"])
-
     markdown_file.add_table(tech_report["summary"])
-    markdown_file.add_header(level=2, title="Repositories")
-    for repository in tech_report["repositories"]:
-        markdown_file.add_header(level=3, title=repository["project_name"])
-        # markdown_file.add_table(DataFrame(repository["technologies_and_frameworks"]))
     markdown_file.write()
 
 
@@ -75,4 +60,3 @@ class MarkdownFile:
             row_values = (str(value) for value in row.values())
             self.lines_of_content.append("|" + "|".join(row_values) + "|\n")
         self.lines_of_content.append("\n")
-        logger.warning(self.lines_of_content)
