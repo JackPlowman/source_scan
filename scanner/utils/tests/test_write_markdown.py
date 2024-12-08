@@ -1,10 +1,14 @@
-from unittest.mock import MagicMock, mock_open, patch
+from unittest.mock import MagicMock, call, patch
 
-from source_scan.scanner.utils.write_markdown import write_output_file
+import pytest
+
+from source_scan.scanner.utils.write_markdown import MarkdownFile, write_output_file
+
+FILE_PATH = "source_scan.scanner.utils.write_markdown"
 
 
-@patch("builtins.open", new_callable=mock_open)
-def test_write_output_file(mock_open: MagicMock) -> None:
+@patch(f"{FILE_PATH}.MarkdownFile")
+def test_write_output_file(mock_markdown_file: MagicMock) -> None:
     # Arrange
     content = {
         "summary": [
@@ -30,5 +34,155 @@ def test_write_output_file(mock_open: MagicMock) -> None:
     # Act
     write_output_file(content)
     # Assert
-    mock_open.assert_called_with("tech_report.md", "w", encoding="utf-8")
-    mock_open().write.assert_called_once()
+    mock_markdown_file.assert_called_once_with(file_path="tech_report.md")
+    mock_markdown_file.return_value.add_header.assert_has_calls(
+        [
+            call(level=1, title="Tech Report"),
+            call(level=2, title="Summary"),
+        ]
+    )
+    mock_markdown_file.return_value.add_table.assert_called_once_with(content["summary"])
+
+
+class TestMarkdownFile:
+    def test_init(self) -> None:
+        # Arrange
+        file_path = "test.md"
+        # Act
+        markdown_file = MarkdownFile(file_path)
+        # Assert
+        assert markdown_file.file_path == file_path
+        assert markdown_file.lines_of_content == []
+
+    @patch(f"{FILE_PATH}.Path")
+    def test_write(self, mock_path: MagicMock) -> None:
+        # Arrange
+        markdown_file = MarkdownFile(file_path="test.md")
+        # Act
+        markdown_file.write()
+        # Assert
+        mock_path.assert_called_once_with("test.md")
+        mock_path.return_value.open.assert_called_once_with("w", encoding="utf-8")
+        mock_path.return_value.open.return_value.__enter__.return_value.writelines.assert_called_once_with(
+            markdown_file.lines_of_content
+        )
+
+    @pytest.mark.parametrize(
+        ("lines_of_content", "expected_result"),
+        [
+            (["# Test\n"], False),
+            (["# Test\\n\\n"], False),
+            (["# Test\n\n"], True),
+            (["\n\n"], True),
+        ],
+    )
+    def test_check_last_line_is_empty(self, lines_of_content: list[str], expected_result: bool) -> None:
+        # Arrange
+        markdown_file = MarkdownFile(file_path="test.md")
+        markdown_file.lines_of_content = lines_of_content
+        # Act
+        response = markdown_file._check_last_line_is_empty()
+        # Assert
+        assert response == expected_result
+
+    @pytest.mark.parametrize(
+        ("level", "title", "lines_of_content", "expected_result"),
+        [
+            (1, "Test", [], ["# Test\n\n"]),
+            (2, "Test", ["# Test\n\n"], ["# Test\n\n", "## Test\n\n"]),
+            (1, "Test", ["# Test\n\n"], ["# Test\n\n", "# Test\n\n"]),
+        ],
+    )
+    def test_add_header(
+        self,
+        level: int,
+        title: str,
+        lines_of_content: list[str],
+        expected_result: list[str],
+    ) -> None:
+        # Arrange
+        markdown_file = MarkdownFile(file_path="test.md")
+        markdown_file.lines_of_content = lines_of_content
+        # Act
+        markdown_file.add_header(level, title)
+        # Assert
+        assert markdown_file.lines_of_content == expected_result
+
+    @pytest.mark.parametrize(
+        ("paragraph", "lines_of_content", "expected_result"),
+        [
+            ("Test", [], ["Test \n\n"]),
+            ("Test", ["Test \n\n"], ["Test \n\n", "Test \n\n"]),
+        ],
+    )
+    def test_add_paragraph(self, paragraph: str, lines_of_content: list[str], expected_result: list[str]) -> None:
+        # Arrange
+        markdown_file = MarkdownFile(file_path="test.md")
+        markdown_file.lines_of_content = lines_of_content
+        # Act
+        markdown_file.add_paragraph(paragraph)
+        # Assert
+        assert markdown_file.lines_of_content == expected_result
+
+    @pytest.mark.parametrize(
+        ("table_contents", "expected_result"),
+        [
+            (
+                [
+                    {"technology": "Markdown", "count": 1},
+                    {"technology": "Python", "count": 1},
+                ],
+                [
+                    "|technology|count|\n",
+                    "|----------|-----|\n",
+                    "|Markdown|1|\n",
+                    "|Python|1|\n",
+                    "\n",
+                ],
+            ),
+            (
+                [
+                    {
+                        "technology": "Markdown",
+                        "count": 1,
+                        "image": "test.png",
+                        "link": "test.com",
+                    },
+                    {
+                        "technology": "Python",
+                        "count": 2,
+                        "image": "test2.png",
+                        "link": "test2.com",
+                    },
+                    {
+                        "technology": "JavaScript",
+                        "count": 3,
+                        "image": "test3.png",
+                        "link": "test3.com",
+                    },
+                    {
+                        "technology": "TypeScript",
+                        "count": 4,
+                        "image": "test4.png",
+                        "link": "test4.com",
+                    },
+                ],
+                [
+                    "|technology|count|image|link|\n",
+                    "|----------|-----|-----|----|\n",
+                    "|Markdown|1|test.png|test.com|\n",
+                    "|Python|2|test2.png|test2.com|\n",
+                    "|JavaScript|3|test3.png|test3.com|\n",
+                    "|TypeScript|4|test4.png|test4.com|\n",
+                    "\n",
+                ],
+            ),
+        ],
+    )
+    def test_add_table(self, table_contents: list[dict], expected_result: list[str]) -> None:
+        # Arrange
+        markdown_file = MarkdownFile(file_path="test.md")
+        # Act
+        markdown_file.add_table(table_contents)
+        # Assert
+        assert markdown_file.lines_of_content == expected_result

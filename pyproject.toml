@@ -6,7 +6,7 @@ python = "^3.13"
 poetry = "1.8.4"
 structlog = "24.4.0"
 pygithub = "2.4.0"
-mdutils = "1.6.0"
+
 
 [tool.poetry.group.dev.dependencies]
 pytest = "8.3.3"
@@ -33,7 +33,6 @@ ignore = [
   "PLR2004", # Ignore magic value
   "D104",    # Ignore missing docstring in public package
   "D100",    # Ignore missing docstring in public module
-  "N999",    # Ignore invalid module name
   "SIM112",  # Ignore Lowercase environment variables (used for GitHub actions)
 ]
 
@@ -64,14 +63,14 @@ exclude = [
 dummy-variable-rgx = "(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 
 [tool.ruff.lint.per-file-ignores]
-"**test_*.py" = ["S101", "D102", "D103", "SLF001", "PT019"]
+"**test_*.py" = ["S101", "D101", "D102", "D103", "SLF001", "FBT001"]
 "test_markdown.py" = ["E501"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google" # Use Google docstring convention.
 
 [tool.ruff.lint.isort]
-known-first-party = ["application", "detector"]
+known-first-party = ["scanner", "tests"]
 
 [tool.vulture]
 ignore_names = ["side_effect", "project_name", "technologies"]
