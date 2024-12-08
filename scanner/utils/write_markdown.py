@@ -1,7 +1,6 @@
 from pathlib import Path
 from typing import Self
 
-from pandas import DataFrame
 from structlog import get_logger, stdlib
 
 from .types import TechReport
@@ -17,22 +16,23 @@ def write_output_file(tech_report: TechReport) -> None:
     """
     markdown_file = MarkdownFile(file_path="tech_report.md")
     markdown_file.add_header(level=1, title="Tech Report")
-    markdown_file.add_paragraph("""
-                                
-| Priority apples | Second priority | Third priority |
-|-------|--------|---------|
-| ambrosia | gala | red delicious |
-| pink lady | jazz | macintosh |
-| honeycrisp | granny smith | fuji |
+    #     markdown_file.add_paragraph("""
 
-""")
+    # | Priority apples | Second priority | Third priority |
+    # |-------|--------|---------|
+    # | ambrosia | gala | red delicious |
+    # | pink lady | jazz | macintosh |
+    # | honeycrisp | granny smith | fuji |
+
+    # """)
     markdown_file.add_header(level=2, title="Summary")
-    logger.warning(DataFrame(tech_report["summary"]).to_markdown(index=False))
-    markdown_file.add_table(DataFrame(tech_report["summary"]))
+    logger.warning(tech_report["summary"])
+
+    markdown_file.add_table(tech_report["summary"])
     markdown_file.add_header(level=2, title="Repositories")
     for repository in tech_report["repositories"]:
         markdown_file.add_header(level=3, title=repository["project_name"])
-        markdown_file.add_table(DataFrame(repository["technologies_and_frameworks"]))
+        # markdown_file.add_table(DataFrame(repository["technologies_and_frameworks"]))
     markdown_file.write()
 
 
@@ -66,8 +66,12 @@ class MarkdownFile:
         """Add a paragraph to the markdown file."""
         self.lines_of_content.append(f"{paragraph}")
 
-    def add_table(self: Self, dataframe: DataFrame) -> None:
+    def add_table(self: Self, table_contents: list[dict]) -> None:
         """Add a table to the markdown file."""
-        logger.warning(dataframe.to_markdown(index=False))
-        self.lines_of_content.append(dataframe.to_markdown(index=False))
+        headers = table_contents[0].keys()
+        self.lines_of_content.append("| " + " | ".join(headers) + " |")
+        self.lines_of_content.append("| " + " | ".join(["---" for _ in headers]) + " |")
+        logger.warning(self.lines_of_content)
+        # logger.warning(dataframe.to_markdown(index=False))
+        # self.lines_of_content.append(dataframe.to_markdown(index=False))
         self.lines_of_content.append("")
