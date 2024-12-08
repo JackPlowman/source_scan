@@ -46,7 +46,7 @@ class MarkdownFile:
 
     def add_header(self, level: int, title: str) -> None:
         """Add a header to the markdown file."""
-        if not self._check_last_line_is_empty():
+        if self.lines_of_content and not self._check_last_line_is_empty():
             self.lines_of_content.append("")
         self.lines_of_content += [f"{'#' * level} {title}", ""]
 

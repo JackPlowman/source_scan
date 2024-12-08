@@ -1,10 +1,12 @@
-from unittest.mock import MagicMock, mock_open, patch
+from unittest.mock import MagicMock, call, patch
 
 from source_scan.scanner.utils.write_markdown import write_output_file
 
+FILE_PATH = "source_scan.scanner.utils.write_markdown"
 
-@patch("builtins.open", new_callable=mock_open)
-def test_write_output_file(mock_open: MagicMock) -> None:
+
+@patch(f"{FILE_PATH}.MarkdownFile")
+def test_write_output_file(mock_markdown_file: MagicMock) -> None:
     # Arrange
     content = {
         "summary": [
@@ -30,5 +32,12 @@ def test_write_output_file(mock_open: MagicMock) -> None:
     # Act
     write_output_file(content)
     # Assert
-    mock_open.assert_called_with("tech_report.md", "w", encoding="utf-8")
-    mock_open().write.assert_called_once()
+    mock_markdown_file.assert_called_once_with(file_path="tech_report.md")
+    mock_markdown_file.return_value.add_header.assert_has_calls(
+        [
+            call(level=1, title="Tech Report"),
+            call(level=2, title="Summary"),
+            call(level=2, title="Repositories"),
+            call(level=3, title="JackPlowman/source_scan"),
+        ]
+    )
