@@ -11,7 +11,8 @@ FILE_PATH = "source_scan.scanner.utils.write_markdown"
 @patch(f"{FILE_PATH}.MarkdownFile")
 def test_write_output_file(mock_markdown_file: MagicMock) -> None:
     # Arrange
-    del environ["GITHUB_STEP_SUMMARY"]
+    if "GITHUB_STEP_SUMMARY" in environ:
+        del environ["GITHUB_STEP_SUMMARY"]
     content = {
         "summary": [
             {"technology": "Markdown", "count": 1},
@@ -43,7 +44,9 @@ def test_write_output_file(mock_markdown_file: MagicMock) -> None:
             call(level=2, title="Summary"),
         ]
     )
-    mock_markdown_file.return_value.add_table.assert_called_once_with(content["summary"])
+    mock_markdown_file.return_value.add_table.assert_called_once_with(
+        content["summary"]
+    )
     mock_markdown_file.return_value.write.assert_called_once_with("tech_report.md")
 
 
@@ -82,8 +85,12 @@ def test_write_output_file__github_summary(mock_markdown_file: MagicMock) -> Non
             call(level=2, title="Summary"),
         ]
     )
-    mock_markdown_file.return_value.add_table.assert_called_once_with(content["summary"])
-    mock_markdown_file.return_value.write.assert_has_calls([call("tech_report.md"), call("test.md")])
+    mock_markdown_file.return_value.add_table.assert_called_once_with(
+        content["summary"]
+    )
+    mock_markdown_file.return_value.write.assert_has_calls(
+        [call("tech_report.md"), call("test.md")]
+    )
     # Cleanup
     del environ["GITHUB_STEP_SUMMARY"]
 
@@ -118,7 +125,9 @@ class TestMarkdownFile:
             (["\n\n"], True),
         ],
     )
-    def test_check_last_line_is_empty(self, lines_of_content: list[str], expected_result: bool) -> None:
+    def test_check_last_line_is_empty(
+        self, lines_of_content: list[str], expected_result: bool
+    ) -> None:
         # Arrange
         markdown_file = MarkdownFile()
         markdown_file.lines_of_content = lines_of_content
@@ -157,7 +166,9 @@ class TestMarkdownFile:
             ("Test", ["Test \n\n"], ["Test \n\n", "Test \n\n"]),
         ],
     )
-    def test_add_paragraph(self, paragraph: str, lines_of_content: list[str], expected_result: list[str]) -> None:
+    def test_add_paragraph(
+        self, paragraph: str, lines_of_content: list[str], expected_result: list[str]
+    ) -> None:
         # Arrange
         markdown_file = MarkdownFile()
         markdown_file.lines_of_content = lines_of_content
@@ -175,7 +186,7 @@ class TestMarkdownFile:
                     {"technology": "Python", "count": 1},
                 ],
                 [
-                    "|technology|count|\n",
+                    "|Technology|Count|\n",
                     "|----------|-----|\n",
                     "|Markdown|1|\n",
                     "|Python|1|\n",
@@ -210,7 +221,7 @@ class TestMarkdownFile:
                     },
                 ],
                 [
-                    "|technology|count|image|link|\n",
+                    "|Technology|Count|Image|Link|\n",
                     "|----------|-----|-----|----|\n",
                     "|Markdown|1|test.png|test.com|\n",
                     "|Python|2|test2.png|test2.com|\n",
@@ -221,7 +232,9 @@ class TestMarkdownFile:
             ),
         ],
     )
-    def test_add_table(self, table_contents: list[dict], expected_result: list[str]) -> None:
+    def test_add_table(
+        self, table_contents: list[dict], expected_result: list[str]
+    ) -> None:
         # Arrange
         markdown_file = MarkdownFile()
         # Act
