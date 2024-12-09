@@ -11,7 +11,8 @@ FILE_PATH = "source_scan.scanner.utils.write_markdown"
 @patch(f"{FILE_PATH}.MarkdownFile")
 def test_write_output_file(mock_markdown_file: MagicMock) -> None:
     # Arrange
-    del environ["GITHUB_STEP_SUMMARY"]
+    if "GITHUB_STEP_SUMMARY" in environ:
+        del environ["GITHUB_STEP_SUMMARY"]
     content = {
         "summary": [
             {"technology": "Markdown", "count": 1},
@@ -175,7 +176,7 @@ class TestMarkdownFile:
                     {"technology": "Python", "count": 1},
                 ],
                 [
-                    "|technology|count|\n",
+                    "|Technology|Count|\n",
                     "|----------|-----|\n",
                     "|Markdown|1|\n",
                     "|Python|1|\n",
@@ -210,7 +211,7 @@ class TestMarkdownFile:
                     },
                 ],
                 [
-                    "|technology|count|image|link|\n",
+                    "|Technology|Count|Image|Link|\n",
                     "|----------|-----|-----|----|\n",
                     "|Markdown|1|test.png|test.com|\n",
                     "|Python|2|test2.png|test2.com|\n",
