@@ -1,6 +1,6 @@
 # Source Scan
 
-Source Scan is a tool that scans a project's source code and generates a report of the technologies and frameworks used in the project. The report is generated in markdown format and can be used to document the owners technologies used in their projects.
+Source Scan is a tool that scans a project's source code and generates a report of the technologies and frameworks used in the project. The report is generated in Markdown and can be used to document the owners technologies used in their projects.
 
 The scanner looks for a file named `PROJECT_TECHNOLOGIES.md` in the docs folder of the project. The file should contain a table with the technologies and frameworks used in the project. The scanner will read the file and generate a report based on the contents of the file.
 
