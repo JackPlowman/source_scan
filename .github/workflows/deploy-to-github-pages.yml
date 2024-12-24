@@ -12,19 +12,22 @@ concurrency:
   group: ${{ github.workflow }}
 
 permissions:
-  contents: write
-  pages: write
-  id-token: write
+  contents: read
 
 jobs:
   run-scanner:
     name: Run Scanner
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
+          persist-credentials: false
       - name: Setup Python Dependencies
         uses: ./.github/actions/setup-dependencies
       - name: Run Scanner
@@ -44,12 +47,17 @@ jobs:
     name: Build GitHub Pages
     needs: run-scanner
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4.2.2
         with:
           sparse-checkout: .github/github_pages_jekyll_config.yml
           sparse-checkout-cone-mode: false
+          persist-credentials: false
       - name: Add Jekyll Config
         run: mv .github/github_pages_jekyll_config.yml _config.yml
       - name: Get Scanner Results
@@ -69,6 +77,9 @@ jobs:
     name: Deploy to GitHub Pages
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -86,6 +97,7 @@ jobs:
         uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
+          persist-credentials: false
       - name: Run Link Tests
         uses: JustinBeckwith/linkinator-action@v1.11.0
         with:

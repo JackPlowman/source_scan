@@ -7,18 +7,21 @@ on:
     paths:
       - .github/other-configurations/labels.yml
 
-permissions:
-  contents: read
-  pull-requests: write
+permissions: {}
 
 jobs:
   configure-labels:
+    name: Configure Labels
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
+          persist-credentials: false
       - name: Sync labels
         uses: micnncim/action-label-syncer@v1.3.0
         with:
