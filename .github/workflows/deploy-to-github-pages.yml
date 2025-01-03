@@ -38,7 +38,7 @@ jobs:
       - name: Rename Scanner Results
         run: mv tech_report.md index.md
       - name: Upload Scanner Results
-        uses: actions/upload-artifact@v4.4.3
+        uses: actions/upload-artifact@v4.5.0
         with:
           path: index.md
           name: scanner-results
