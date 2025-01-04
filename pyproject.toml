@@ -9,8 +9,8 @@ pygithub = "2.5.0"
 [tool.poetry.group.dev.dependencies]
 pytest = "8.3.4"
 pytest-cov = "6.0.0"
-ruff = "0.8.2"
-vulture = "2.13"
+ruff = "0.8.6"
+vulture = "2.14"
 
 [build-system]
 requires = ["poetry-core"]
