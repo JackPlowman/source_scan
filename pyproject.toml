@@ -62,7 +62,7 @@ dummy-variable-rgx = "(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 convention = "google" # Use Google docstring convention.
 
 [tool.ruff.lint.isort]
-known-first-party = ["scannerscanner/utils/read_markdown.py", "tests"]
+known-first-party = ["scanner", "tests"]
 
 [tool.vulture]
 ignore_names = ["side_effect", "project_name", "technologies"]
