@@ -25,7 +25,9 @@ def write_output_file(tech_report: TechReport) -> None:
         logger.debug("Running in GitHub Actions, generating action summary")
         markdown_file.write(environ["GITHUB_STEP_SUMMARY"])
     else:
-        logger.debug("Not running in GitHub Actions, skipping generating action summary")
+        logger.debug(
+            "Not running in GitHub Actions, skipping generating action summary"
+        )
 
 
 class MarkdownFile:
@@ -60,7 +62,9 @@ class MarkdownFile:
         """Add a table to the markdown file."""
         headers = [header.title() for header in table_contents[0]]
         self.lines_of_content.append("|" + "|".join(headers) + "|\n")
-        self.lines_of_content.append("|" + "|".join(["-" * len(header) for header in headers]) + "|\n")
+        self.lines_of_content.append(
+            "|" + "|".join(["-" * len(header) for header in headers]) + "|\n"
+        )
         for row in table_contents:
             row_values = (str(value) for value in row.values())
             self.lines_of_content.append("|" + "|".join(row_values) + "|\n")

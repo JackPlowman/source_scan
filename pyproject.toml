@@ -17,12 +17,9 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.ruff]
-line-length = 120
 target-version = "py313"
 
 [tool.ruff.lint]
-# Add the `line-too-long` rule to the enforced rule set.
-extend-select = ["E501"]
 select = ["ALL"]
 
 ignore = [
@@ -34,11 +31,9 @@ ignore = [
   "SIM112",  # Ignore Lowercase environment variables (used for GitHub actions)
 ]
 
-# Allow autofix for all enabled rules (when `--fix`) is provided.
 fixable = ["ALL"]
 unfixable = []
 
-# Exclude a variety of commonly ignored directories.
 exclude = [
   ".bzr",
   ".direnv",
@@ -57,7 +52,6 @@ exclude = [
   "_build",
 ]
 
-# Allow unused variables when underscore-prefixed.
 dummy-variable-rgx = "(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 
 [tool.ruff.lint.per-file-ignores]
