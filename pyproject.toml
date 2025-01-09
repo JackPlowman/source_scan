@@ -1,3 +1,8 @@
+[project]
+name = "source-scan"
+version = "1.0.0"
+requires-python = ">=3.13"
+
 [tool.poetry]
 package-mode = false
 
@@ -13,7 +18,7 @@ ruff = "0.8.6"
 vulture = "2.14"
 
 [build-system]
-requires = ["poetry-core"]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.ruff]
