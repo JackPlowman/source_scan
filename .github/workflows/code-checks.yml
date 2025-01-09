@@ -41,30 +41,8 @@ jobs:
           VALIDATE_PYTHON_RUFF: false
           VALIDATE_PYTHON_PYINK: false
 
-  check-python-code-format-and-quality:
-    name: Check Python Code Format and Quality
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4.2.2
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-      - name: Setup Python Dependencies
-        uses: ./.github/actions/setup-dependencies
-      - name: Check Python Code for Dead Code (Vulture)
-        run: just vulture
-      - name: Check Python Code Format (Ruff)
-        run: just ruff-format
-        env:
-          RUFF_OUTPUT_FORMAT: "github"
-      - name: Check Python Code Quality (Ruff)
-        run: just ruff-lint
-        env:
-          RUFF_OUTPUT_FORMAT: "github"
-
-  upload-ruff-analysis-results:
-    name: Upload Ruff Analysis Results
+  run-python-code-checks:
+    name: Run Python Code Checks
     runs-on: ubuntu-latest
     permissions:
       security-events: write
@@ -74,19 +52,29 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
-      - name: Setup Python Dependencies
+      - name: Setup Dependencies
         uses: ./.github/actions/setup-dependencies
+      - name: Install Poetry Dependencies
+        run: just install
       - name: Check Python Code Quality (Ruff)
         run: just ruff-lint
         env:
           RUFF_OUTPUT_FORMAT: "sarif"
           RUFF_OUTPUT_FILE: "ruff-results.sarif"
         continue-on-error: true
-      - name: Upload Ruff analysis results to GitHub
+      - name: Upload analysis results to GitHub
         uses: github/codeql-action/upload-sarif@v3.28.0
         with:
           sarif_file: ruff-results.sarif
           wait-for-processing: true
+      - name: Check Python Code Format (Ruff)
+        run: just ruff-format
+        env:
+          RUFF_OUTPUT_FORMAT: "github"
+      - name: Check Python Code Quality (Ruff)
+        run: just ruff-lint
+        env:
+          RUFF_OUTPUT_FORMAT: "github"
 
   unit-test:
     name: Run Unit Tests
@@ -104,7 +92,7 @@ jobs:
       - name: Override Coverage Source Path for SonarCloud
         run: sed -i "s/<source>\/home\/runner\/work\/source_scan\/source_scan<\/source>/<source>\/github\/workspace<\/source>/g" /home/runner/work/source_scan/source_scan/coverage.xml
       - name: SonarCloud Scan
-        uses: SonarSource/sonarqube-scan-action@v4.2.1
+        uses: SonarSource/sonarcloud-github-action@v4.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
