@@ -9,7 +9,7 @@ from structlog import get_logger, stdlib
 from .read_markdown import find_technologies_and_frameworks
 
 if TYPE_CHECKING:
-    from .types import ProjectTechnologiesAndFrameworks
+    from .custom_types import ProjectTechnologiesAndFrameworks
 
 logger: stdlib.BoundLogger = get_logger()
 

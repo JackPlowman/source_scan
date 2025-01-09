@@ -1,7 +1,7 @@
 from structlog import get_logger, stdlib
 
 from .utils.github_interactions import retrieve_repositories, scrape_technologies
-from .utils.types import ProjectTechnologiesAndFrameworks, TechReport
+from .utils.custom_types import ProjectTechnologiesAndFrameworks, TechReport
 from .utils.write_markdown import write_output_file
 
 logger: stdlib.BoundLogger = get_logger()
