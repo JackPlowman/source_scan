@@ -25,7 +25,9 @@ def test_generate_tech_report(
     # Assert
     mock_retrieve_repositories.assert_called_once_with()
     mock_scrape_technologies.assert_called_once_with(tech_detective)
-    mock_write_output_file.assert_called_once_with(mock_summarise_tech_report.return_value)
+    mock_write_output_file.assert_called_once_with(
+        mock_summarise_tech_report.return_value
+    )
 
 
 @pytest.mark.parametrize(
@@ -79,7 +81,9 @@ def test_generate_tech_report(
         ),
     ],
 )
-def test_summarise_tech_report(technologies_and_frameworks: list[dict], expected_summary: dict[str, list]) -> None:
+def test_summarise_tech_report(
+    technologies_and_frameworks: list[dict], expected_summary: dict[str, list]
+) -> None:
     # Act
     result = summarise_tech_report(technologies_and_frameworks)
     # Assert

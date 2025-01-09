@@ -10,12 +10,16 @@ logger: stdlib.BoundLogger = get_logger()
 def generate_tech_report() -> None:
     """Generate a report on the technologies used in the repository."""
     repositories = retrieve_repositories()
-    technologies_and_frameworks = [scrape_technologies(repository) for repository in repositories]
+    technologies_and_frameworks = [
+        scrape_technologies(repository) for repository in repositories
+    ]
     tech_report = summarise_tech_report(technologies_and_frameworks)
     write_output_file(tech_report)
 
 
-def summarise_tech_report(technologies_and_frameworks: list[ProjectTechnologiesAndFrameworks]) -> TechReport:
+def summarise_tech_report(
+    technologies_and_frameworks: list[ProjectTechnologiesAndFrameworks],
+) -> TechReport:
     """Summarise the technologies used in the repository.
 
     Args:
@@ -30,7 +34,10 @@ def summarise_tech_report(technologies_and_frameworks: list[ProjectTechnologiesA
             else:
                 summary[technology] = 1
 
-    summary = [{"technology": technology, "count": count} for technology, count in summary.items()]
+    summary = [
+        {"technology": technology, "count": count}
+        for technology, count in summary.items()
+    ]
     summary.sort(key=lambda x: x["count"], reverse=True)
 
     return {"summary": summary, "repositories": technologies_and_frameworks}

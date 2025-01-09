@@ -11,7 +11,8 @@ def find_technologies_and_frameworks(file_contents: str) -> list[str]:
     """Find the technologies and frameworks used in a repository.
 
     Args:
-        file_contents (str): The contents of the file to find technologies and frameworks in.
+        file_contents (str): The contents of the file to find technologies and
+        frameworks in.
 
     Returns:
         list[str]: The list of technologies and frameworks used in the repository.
@@ -46,19 +47,24 @@ def find_project_technologies_and_frameworks_header(
         int: The index of the header.
     """
     tech_and_frameworks_header = [
-        index for index, line in enumerate(file_contents_lines) if "# Project Technologies and Frameworks" in line
+        index
+        for index, line in enumerate(file_contents_lines)
+        if "# Project Technologies and Frameworks" in line
     ]
     if not tech_and_frameworks_header:
         return -1
     return tech_and_frameworks_header[-1]
 
 
-def find_table_data_start_index(header_index: int, file_contents_lines: list[str]) -> int:
+def find_table_data_start_index(
+    header_index: int, file_contents_lines: list[str]
+) -> int:
     """Find the index of the start of the table data.
 
     Args:
         header_index (int): The index of the header.
-        file_contents_lines (list[str]): The lines of the file to find the start of the table data in.
+        file_contents_lines (list[str]): The lines of the file to find the start of the
+        table data in.
 
     Returns:
         int: The index of the start of the table data.
