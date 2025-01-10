@@ -30,6 +30,8 @@ jobs:
           persist-credentials: false
       - name: Setup Python Dependencies
         uses: ./.github/actions/setup-dependencies
+        with:
+          root-only: true
       - name: Run Scanner
         run: just run
         env:
