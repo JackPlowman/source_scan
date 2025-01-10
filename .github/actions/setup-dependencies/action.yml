@@ -25,6 +25,6 @@ runs:
       shell: bash
       run: just install-root-only
     - name: Install Poetry Dependencies
-      if: ${{ !inputs.root-only == "false" }}
+      if: ${{ inputs.root-only == "false" }}
       shell: bash
       run: just install
