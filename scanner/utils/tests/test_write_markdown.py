@@ -13,6 +13,7 @@ def test_write_output_file(mock_markdown_file: MagicMock) -> None:
     # Arrange
     if "GITHUB_STEP_SUMMARY" in environ:
         del environ["GITHUB_STEP_SUMMARY"]
+    environ["GITHUB_REPOSITORY_OWNER"] = "JackPlowman"
     content = {
         "summary": [
             {"technology": "Markdown", "count": 1},
@@ -23,7 +24,7 @@ def test_write_output_file(mock_markdown_file: MagicMock) -> None:
         ],
         "repositories": [
             {
-                "project_name": "JackPlowman/source_scan",
+                "project_name": "source_scan",
                 "technologies_and_frameworks": [
                     {
                         "technology": "Markdown",
@@ -41,6 +42,7 @@ def test_write_output_file(mock_markdown_file: MagicMock) -> None:
     write_output_file(content)
     # Assert
     mock_markdown_file.assert_called_once_with()
+    assert mock_markdown_file.return_value.add_header.call_count == 3
     mock_markdown_file.return_value.add_header.assert_has_calls(
         [
             call(level=1, title="Tech Report"),
@@ -48,22 +50,32 @@ def test_write_output_file(mock_markdown_file: MagicMock) -> None:
             call(level=2, title="Repositories"),
         ]
     )
+    assert mock_markdown_file.return_value.add_table.call_count == 2
+    print(mock_markdown_file.return_value.add_table.call_args_list)
     mock_markdown_file.return_value.add_table.assert_has_calls(
         [
             call(
-                content["summary"],
+                [
+                    {"technology": "Markdown", "count": 1},
+                    {"technology": "Python", "count": 1},
+                    {"technology": "Poetry", "count": 1},
+                    {"technology": "Dependabot", "count": 1},
+                    {"technology": "GitHub Actions", "count": 1},
+                ]
             ),
             call(
                 [
                     {
-                        "Project Name": "JackPlowman/source_scan",
-                        "Technologies and Frameworks": "![Markdown](https://img.shields.io/badge/-Markdown-000000?style=flat&logo=markdown) ![Python](https://img.shields.io/badge/-Python-3776AB?style=flat&logo=python&logoColor=white)",  # noqa: E501
+                        "Project Name": "[source_scan](https://github.com/JackPlowman/source_scan)",
+                        "Technologies and Frameworks": "![Markdown](https://img.shields.io/badge/-Markdown-000000?style=flat&logo=markdown) ![Python](https://img.shields.io/badge/-Python-3776AB?style=flat&logo=python&logoColor=white)",
                     }
                 ]
             ),
         ]
     )
     mock_markdown_file.return_value.write.assert_called_once_with("tech_report.md")
+    # Cleanup
+    del environ["GITHUB_REPOSITORY_OWNER"]
 
 
 @patch(f"{FILE_PATH}.MarkdownFile")
@@ -79,7 +91,7 @@ def test_write_output_file__github_summary(mock_markdown_file: MagicMock) -> Non
         ],
         "repositories": [
             {
-                "project_name": "JackPlowman/source_scan",
+                "project_name": "source_scan",
                 "technologies_and_frameworks": [
                     {
                         "technology": "Markdown",
@@ -94,26 +106,36 @@ def test_write_output_file__github_summary(mock_markdown_file: MagicMock) -> Non
         ],
     }
     environ["GITHUB_STEP_SUMMARY"] = "test.md"
+    environ["GITHUB_REPOSITORY_OWNER"] = "JackPlowman"
     # Act
     write_output_file(content)
     # Assert
     mock_markdown_file.assert_called_once_with()
+    assert mock_markdown_file.return_value.add_header.call_count == 3
     mock_markdown_file.return_value.add_header.assert_has_calls(
         [
             call(level=1, title="Tech Report"),
             call(level=2, title="Summary"),
+            call(level=2, title="Repositories"),
         ]
     )
+    assert mock_markdown_file.return_value.add_table.call_count == 2
     mock_markdown_file.return_value.add_table.assert_has_calls(
         [
             call(
-                content["summary"],
+                [
+                    {"technology": "Markdown", "count": 1},
+                    {"technology": "Python", "count": 1},
+                    {"technology": "Poetry", "count": 1},
+                    {"technology": "Dependabot", "count": 1},
+                    {"technology": "GitHub Actions", "count": 1},
+                ]
             ),
             call(
                 [
                     {
-                        "Project Name": "JackPlowman/source_scan",
-                        "Technologies and Frameworks": "![Markdown](https://img.shields.io/badge/-Markdown-000000?style=flat&logo=markdown) ![Python](https://img.shields.io/badge/-Python-3776AB?style=flat&logo=python&logoColor=white)",  # noqa: E501
+                        "Project Name": "[source_scan](https://github.com/JackPlowman/source_scan)",
+                        "Technologies and Frameworks": "![Markdown](https://img.shields.io/badge/-Markdown-000000?style=flat&logo=markdown) ![Python](https://img.shields.io/badge/-Python-3776AB?style=flat&logo=python&logoColor=white)",
                     }
                 ]
             ),
@@ -124,6 +146,7 @@ def test_write_output_file__github_summary(mock_markdown_file: MagicMock) -> Non
     )
     # Cleanup
     del environ["GITHUB_STEP_SUMMARY"]
+    del environ["GITHUB_REPOSITORY_OWNER"]
 
 
 class TestMarkdownFile:
