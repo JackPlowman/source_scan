@@ -102,6 +102,73 @@ def test_generate_tech_report(
                 ],
             },
         ),
+        (
+            # Empty list test case
+            [],
+            {
+                "summary": [],
+                "repositories": [],
+            },
+        ),
+        (
+            # Single repository with single technology
+            [
+                {
+                    "technologies_and_frameworks": [
+                        {"technology": "Python", "badge": "Python"},
+                    ]
+                },
+            ],
+            {
+                "summary": [
+                    {"technology_badge": "Python", "count": 1},
+                ],
+                "repositories": [
+                    {
+                        "technologies_and_frameworks": [
+                            {"technology": "Python", "badge": "Python"},
+                        ]
+                    },
+                ],
+            },
+        ),
+        (
+            # Multiple repositories with same technologies in different order
+            [
+                {
+                    "technologies_and_frameworks": [
+                        {"technology": "Python", "badge": "Python"},
+                        {"technology": "Django", "badge": "Django"},
+                    ]
+                },
+                {
+                    "technologies_and_frameworks": [
+                        {"technology": "Django", "badge": "Django"},
+                        {"technology": "Python", "badge": "Python"},
+                    ]
+                },
+            ],
+            {
+                "summary": [
+                    {"technology_badge": "Python", "count": 2},
+                    {"technology_badge": "Django", "count": 2},
+                ],
+                "repositories": [
+                    {
+                        "technologies_and_frameworks": [
+                            {"technology": "Python", "badge": "Python"},
+                            {"technology": "Django", "badge": "Django"},
+                        ]
+                    },
+                    {
+                        "technologies_and_frameworks": [
+                            {"technology": "Django", "badge": "Django"},
+                            {"technology": "Python", "badge": "Python"},
+                        ]
+                    },
+                ],
+            },
+        ),
     ],
 )
 def test_summarise_tech_report(
@@ -110,5 +177,4 @@ def test_summarise_tech_report(
     # Act
     result = summarise_tech_report(technologies_and_frameworks)
     # Assert
-    print(f"result: {result}")
     assert result == expected_summary
