@@ -35,47 +35,137 @@ def test_generate_tech_report(
     [
         (
             [
-                {"technologies_and_frameworks": ["Python", "Django", "Docker"]},
-                {"technologies_and_frameworks": ["Python", "Flask"]},
-                {"technologies_and_frameworks": ["JavaScript", "React", "Node.js"]},
-                {"technologies_and_frameworks": ["Python", "Django"]},
+                {
+                    "technologies_and_frameworks": [
+                        {"technology": "Python", "badge": "Python"},
+                        {"technology": "Django", "badge": "Django"},
+                        {"technology": "Docker", "badge": "Docker"},
+                    ]
+                },
+                {
+                    "technologies_and_frameworks": [
+                        {"technology": "Python", "badge": "Python"},
+                        {"technology": "Flask", "badge": "Flask"},
+                    ]
+                },
+                {
+                    "technologies_and_frameworks": [
+                        {"technology": "JavaScript", "badge": "JavaScript"},
+                        {"technology": "React", "badge": "React"},
+                        {"technology": "Node.js", "badge": "Node.js"},
+                    ]
+                },
+                {
+                    "technologies_and_frameworks": [
+                        {"technology": "Python", "badge": "Python"},
+                        {"technology": "Django", "badge": "Django"},
+                    ],
+                },
             ],
             {
                 "summary": [
-                    {"technology": "Python", "count": 3},
-                    {"technology": "Django", "count": 2},
-                    {"technology": "Docker", "count": 1},
-                    {"technology": "Flask", "count": 1},
-                    {"technology": "JavaScript", "count": 1},
-                    {"technology": "React", "count": 1},
-                    {"technology": "Node.js", "count": 1},
+                    {"technology_badge": "Python", "count": 3},
+                    {"technology_badge": "Django", "count": 2},
+                    {"technology_badge": "Docker", "count": 1},
+                    {"technology_badge": "Flask", "count": 1},
+                    {"technology_badge": "JavaScript", "count": 1},
+                    {"technology_badge": "React", "count": 1},
+                    {"technology_badge": "Node.js", "count": 1},
                 ],
                 "repositories": [
-                    {"technologies_and_frameworks": ["Python", "Django", "Docker"]},
-                    {"technologies_and_frameworks": ["Python", "Flask"]},
-                    {"technologies_and_frameworks": ["JavaScript", "React", "Node.js"]},
-                    {"technologies_and_frameworks": ["Python", "Django"]},
+                    {
+                        "technologies_and_frameworks": [
+                            {"technology": "Python", "badge": "Python"},
+                            {"technology": "Django", "badge": "Django"},
+                            {"technology": "Docker", "badge": "Docker"},
+                        ]
+                    },
+                    {
+                        "technologies_and_frameworks": [
+                            {"technology": "Python", "badge": "Python"},
+                            {"technology": "Flask", "badge": "Flask"},
+                        ]
+                    },
+                    {
+                        "technologies_and_frameworks": [
+                            {"technology": "JavaScript", "badge": "JavaScript"},
+                            {"technology": "React", "badge": "React"},
+                            {"technology": "Node.js", "badge": "Node.js"},
+                        ]
+                    },
+                    {
+                        "technologies_and_frameworks": [
+                            {"technology": "Python", "badge": "Python"},
+                            {"technology": "Django", "badge": "Django"},
+                        ]
+                    },
                 ],
             },
         ),
         (
+            # Empty list test case
+            [],
+            {
+                "summary": [],
+                "repositories": [],
+            },
+        ),
+        (
+            # Single repository with single technology
             [
-                {"technologies_and_frameworks": ["Java", "Spring"]},
-                {"technologies_and_frameworks": ["Java", "Hibernate"]},
-                {"technologies_and_frameworks": ["JavaScript", "Angular"]},
+                {
+                    "technologies_and_frameworks": [
+                        {"technology": "Python", "badge": "Python"},
+                    ]
+                },
             ],
             {
                 "summary": [
-                    {"technology": "Java", "count": 2},
-                    {"technology": "Spring", "count": 1},
-                    {"technology": "Hibernate", "count": 1},
-                    {"technology": "JavaScript", "count": 1},
-                    {"technology": "Angular", "count": 1},
+                    {"technology_badge": "Python", "count": 1},
                 ],
                 "repositories": [
-                    {"technologies_and_frameworks": ["Java", "Spring"]},
-                    {"technologies_and_frameworks": ["Java", "Hibernate"]},
-                    {"technologies_and_frameworks": ["JavaScript", "Angular"]},
+                    {
+                        "technologies_and_frameworks": [
+                            {"technology": "Python", "badge": "Python"},
+                        ]
+                    },
+                ],
+            },
+        ),
+        (
+            # Multiple repositories with same technologies in different order
+            [
+                {
+                    "technologies_and_frameworks": [
+                        {"technology": "Python", "badge": "Python"},
+                        {"technology": "Django", "badge": "Django"},
+                    ]
+                },
+                {
+                    "technologies_and_frameworks": [
+                        {"technology": "Django", "badge": "Django"},
+                        {"technology": "Python", "badge": "Python"},
+                    ]
+                },
+            ],
+            {
+                "summary": [
+                    {"technology_badge": "Python", "count": 2},
+                    {"technology_badge": "Django", "count": 2},
+                ],
+                "repositories": [
+                    {
+                        "technologies_and_frameworks": [
+                            {"technology": "Python", "badge": "Python"},
+                            {"technology": "Django", "badge": "Django"},
+                        ]
+                    },
+                    {
+                        "technologies_and_frameworks": [
+                            {"technology": "Django", "badge": "Django"},
+                            {"technology": "Python", "badge": "Python"},
+                        ]
+                    },
                 ],
             },
         ),

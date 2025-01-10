@@ -4,7 +4,7 @@ from typing import Self
 
 from structlog import get_logger, stdlib
 
-from .types import TechReport
+from .custom_types import TechReport
 
 logger: stdlib.BoundLogger = get_logger()
 

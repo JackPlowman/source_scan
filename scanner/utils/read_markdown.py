@@ -1,8 +1,12 @@
 from __future__ import annotations
 
 from re import findall
+from typing import TYPE_CHECKING
 
 from structlog import get_logger, stdlib
+
+if TYPE_CHECKING:
+    from .custom_types import TechnologiesAndFrameworksDetail
 
 logger: stdlib.BoundLogger = get_logger()
 
@@ -77,7 +81,7 @@ def find_table_data_start_index(
     return start_index + 2
 
 
-def find_markdown_badges(line_contents: str) -> list[str]:
+def find_markdown_badges(line_contents: str) -> list[TechnologiesAndFrameworksDetail]:
     """Find the markdown badges in a line.
 
     Args:
@@ -86,8 +90,14 @@ def find_markdown_badges(line_contents: str) -> list[str]:
     Returns:
         list[str]: The list of technologies and frameworks used in the repository.
     """
-    badge_matches = findall(r"!\[(.*?)\]", line_contents)
+    badge_matches = findall(r"!\[([^\]]*)\]\(([^)]*)\)", line_contents)
     if not badge_matches:
         return []
     logger.debug("Found badges", badges=badge_matches)
-    return badge_matches
+    return [
+        {
+            "technology": badge_match[0],
+            "badge": f"![{badge_match[0]}]({badge_match[1]})",
+        }
+        for badge_match in badge_matches
+    ]
