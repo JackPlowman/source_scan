@@ -5,6 +5,14 @@ on:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      scanner_debug:
+        type: choice
+        description: Turn on debug mode for the scanner
+        required: true
+        options:
+        - false
+        - true
   schedule:
     - cron: "0 0 * * *"
 
@@ -35,6 +43,7 @@ jobs:
         env:
           GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
           FORCE_COLOR: true
+          DEBUG: ${{ github.event.inputs.scanner_debug }}
       - name: Rename Scanner Results
         run: mv tech_report.md index.md
       - name: Upload Scanner Results
