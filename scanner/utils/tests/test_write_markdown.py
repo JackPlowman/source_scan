@@ -51,7 +51,6 @@ def test_write_output_file(mock_markdown_file: MagicMock) -> None:
         ]
     )
     assert mock_markdown_file.return_value.add_table.call_count == 2
-    print(mock_markdown_file.return_value.add_table.call_args_list)
     mock_markdown_file.return_value.add_table.assert_has_calls(
         [
             call(
@@ -66,8 +65,8 @@ def test_write_output_file(mock_markdown_file: MagicMock) -> None:
             call(
                 [
                     {
-                        "Project Name": "[source_scan](https://github.com/JackPlowman/source_scan)",
-                        "Technologies and Frameworks": "![Markdown](https://img.shields.io/badge/-Markdown-000000?style=flat&logo=markdown) ![Python](https://img.shields.io/badge/-Python-3776AB?style=flat&logo=python&logoColor=white)",
+                        "Project Name": "[source_scan](https://github.com/source_scan)",
+                        "Technologies and Frameworks": "![Markdown](https://img.shields.io/badge/-Markdown-000000?style=flat&logo=markdown) ![Python](https://img.shields.io/badge/-Python-3776AB?style=flat&logo=python&logoColor=white)",  # noqa: E501
                     }
                 ]
             ),
@@ -134,8 +133,8 @@ def test_write_output_file__github_summary(mock_markdown_file: MagicMock) -> Non
             call(
                 [
                     {
-                        "Project Name": "[source_scan](https://github.com/JackPlowman/source_scan)",
-                        "Technologies and Frameworks": "![Markdown](https://img.shields.io/badge/-Markdown-000000?style=flat&logo=markdown) ![Python](https://img.shields.io/badge/-Python-3776AB?style=flat&logo=python&logoColor=white)",
+                        "Project Name": "[source_scan](https://github.com/source_scan)",
+                        "Technologies and Frameworks": "![Markdown](https://img.shields.io/badge/-Markdown-000000?style=flat&logo=markdown) ![Python](https://img.shields.io/badge/-Python-3776AB?style=flat&logo=python&logoColor=white)",  # noqa: E501
                     }
                 ]
             ),
