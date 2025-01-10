@@ -3,7 +3,7 @@ name: "Run Scanner"
 on:
   workflow_dispatch:
     inputs:
-      #checkov:skip=CKV_GHA_7: Debug input only affects logging verbosity, not build output
+      # checkov:skip=CKV_GHA_7: Debug input only affects logging verbosity, not build output
       scanner_debug:
         description: "Turn on debug mode for the scanner"
         type: boolean
