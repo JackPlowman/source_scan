@@ -20,12 +20,30 @@ def test_find_technologies_and_frameworks() -> None:
 
     # Assert
     assert technologies_and_frameworks == [
-        "Markdown",
-        "Python",
-        "Poetry",
-        "Dependabot",
-        "GitHub Actions",
-        "GitHub Pages",
+        {
+            "technology": "Markdown",
+            "badge": "![Markdown](https://img.shields.io/badge/markdown-%23000000.svg?style=for-the-badge&logo=markdown&logoColor=white)",
+        },
+        {
+            "technology": "Python",
+            "badge": "![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)",
+        },
+        {
+            "technology": "Poetry",
+            "badge": "![Poetry](https://img.shields.io/badge/poetry-%23150458.svg?style=for-the-badge&logo=poetry&logoColor=white)",
+        },
+        {
+            "technology": "Dependabot",
+            "badge": "![Dependabot](https://img.shields.io/badge/dependabot-025E8C?style=for-the-badge&logo=dependabot&logoColor=white)",
+        },
+        {
+            "technology": "GitHub Actions",
+            "badge": "![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)",
+        },
+        {
+            "technology": "GitHub Pages",
+            "badge": "![GitHub Pages](https://img.shields.io/badge/github%20pages-121013?style=for-the-badge&logo=github&logoColor=white)",
+        },
     ]
 
 
@@ -85,19 +103,46 @@ def test_find_table_data_start_index() -> None:
             "| Frontend | ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript"
             "&logoColor=white) ![Astro](https://img.shields.io/badge/astro-%232C2052.svg?style=for-the-badge&logo=astro"
             "&logoColor=white)                      |",
-            ["TypeScript", "Astro"],
+            [
+                {
+                    "technology": "TypeScript",
+                    "badge": "![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)",
+                },
+                {
+                    "technology": "Astro",
+                    "badge": "![Astro](https://img.shields.io/badge/astro-%232C2052.svg?style=for-the-badge&logo=astro&logoColor=white)",
+                },
+            ],
         ),
         (
             "| Backend  | ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python"
             "&logoColor=ffdd54) ![Poetry](https://img.shields.io/badge/poetry-%23150458.svg?style=for-the-badge"
             "&logo=poetry&logoColor=white)                                     |",
-            ["Python", "Poetry"],
+            [
+                {
+                    "technology": "Python",
+                    "badge": "![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)",
+                },
+                {
+                    "technology": "Poetry",
+                    "badge": "![Poetry](https://img.shields.io/badge/poetry-%23150458.svg?style=for-the-badge&logo=poetry&logoColor=white)",
+                },
+            ],
         ),
         (
             "| CI/CD    | ![Dependabot](https://img.shields.io/badge/dependabot-025E8C?style=for-the-badge&logo=dependabot"
             "&logoColor=white) ![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge"
             "&logo=githubactions&logoColor=white) |",
-            ["Dependabot", "GitHub Actions"],
+            [
+                {
+                    "technology": "Dependabot",
+                    "badge": "![Dependabot](https://img.shields.io/badge/dependabot-025E8C?style=for-the-badge&logo=dependabot&logoColor=white)",
+                },
+                {
+                    "technology": "GitHub Actions",
+                    "badge": "![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)",
+                },
+            ],
         ),
         ("", []),
     ],
@@ -105,6 +150,5 @@ def test_find_table_data_start_index() -> None:
 def test_find_markdown_badges(line_contents: str, expected: list[str]) -> None:
     # Act
     actual = find_markdown_badges(line_contents)
-
     # Assert
     assert actual == expected
