@@ -22,7 +22,7 @@ def write_output_file(tech_report: TechReport) -> None:
     markdown_file.add_header(level=2, title="Repositories")
     repositories_table_contents = [
         {
-            "Project Name": project["project_name"],
+            "Project Name": f"[{project['project_name']}](https://github.com/{project['project_name']})",
             "Technologies and Frameworks": " ".join(
                 technology["badge"]
                 for technology in project["technologies_and_frameworks"]
