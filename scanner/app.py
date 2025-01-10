@@ -1,7 +1,7 @@
 from structlog import get_logger, stdlib
 
-from .utils.github_interactions import retrieve_repositories, scrape_technologies
 from .utils.custom_types import ProjectTechnologiesAndFrameworks, TechReport
+from .utils.github_interactions import retrieve_repositories, scrape_technologies
 from .utils.write_markdown import write_output_file
 
 logger: stdlib.BoundLogger = get_logger()
@@ -10,10 +10,8 @@ logger: stdlib.BoundLogger = get_logger()
 def generate_tech_report() -> None:
     """Generate a report on the technologies used in the repository."""
     repositories = retrieve_repositories()
-    technologies_and_frameworks = [
-        scrape_technologies(repository) for repository in repositories
-    ]
-    tech_report = summarise_tech_report(technologies_and_frameworks)
+    projects = [scrape_technologies(repository) for repository in repositories]
+    tech_report = summarise_tech_report(projects)
     write_output_file(tech_report)
 
 
@@ -29,13 +27,13 @@ def summarise_tech_report(
     summary = {}
     for project in technologies_and_frameworks:
         for technology in project["technologies_and_frameworks"]:
-            if technology in summary:
-                summary[technology] += 1
+            if technology["badge"] in summary:
+                summary[technology["badge"]] += 1
             else:
-                summary[technology] = 1
+                summary[technology["badge"]] = 1
 
     summary = [
-        {"technology": technology, "count": count}
+        {"technology_badge": technology, "count": count}
         for technology, count in summary.items()
     ]
     summary.sort(key=lambda x: x["count"], reverse=True)
