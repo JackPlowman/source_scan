@@ -1,0 +1,44 @@
+name: "Run Scanner"
+
+on:
+  workflow_dispatch:
+    inputs:
+      # checkov:skip=CKV_GHA_7: Debug input only affects logging verbosity, not build output
+      scanner_debug:
+        description: "Turn on debug mode for the scanner"
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  run-scanner:
+    name: Run Scanner
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Setup Python Dependencies
+        uses: ./.github/actions/setup-dependencies
+      - name: Run Scanner
+        run: just run
+        env:
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+          FORCE_COLOR: true
+          DEBUG: ${{ inputs.scanner_debug }}
+      - name: Rename Scanner Results
+        run: mv tech_report.md index.md
+      - name: Upload Scanner Results
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          path: index.md
+          name: scanner-results
