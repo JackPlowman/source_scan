@@ -1,6 +1,12 @@
 name: "Setup Dependencies"
 description: "Installs dependencies for the project"
 
+inputs:
+  root-only:
+    description: "Whether to only update the root directory"
+    required: false
+    default: "false"
+
 runs:
   using: "composite"
   steps:
@@ -14,6 +20,11 @@ runs:
         cache: "poetry"
     - name: Set up Just
       uses: extractions/setup-just@v2
+    - name: Install Poetry Dependencies (Root Only)
+      if: ${{ inputs.root-only }}
+      shell: bash
+      run: just install-root-only
     - name: Install Poetry Dependencies
+      if: ${{ !inputs.root-only }}
       shell: bash
       run: just install
