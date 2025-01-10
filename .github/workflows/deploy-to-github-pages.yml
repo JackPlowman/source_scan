@@ -11,10 +11,13 @@ on:
         description: Turn on debug mode for the scanner
         required: true
         options:
-        - false
-        - true
+          - false
+          - true
   schedule:
     - cron: "0 0 * * *"
+
+env:
+  scanner_debug: ${{ github.event.inputs.scanner_debug || 'false' }}
 
 concurrency:
   group: ${{ github.workflow }}
@@ -43,7 +46,7 @@ jobs:
         env:
           GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
           FORCE_COLOR: true
-          DEBUG: ${{ github.event.inputs.scanner_debug }}
+          DEBUG: ${{ env.scanner_debug }}
       - name: Rename Scanner Results
         run: mv tech_report.md index.md
       - name: Upload Scanner Results
