@@ -13,7 +13,6 @@ def test_write_output_file(mock_markdown_file: MagicMock) -> None:
     # Arrange
     if "GITHUB_STEP_SUMMARY" in environ:
         del environ["GITHUB_STEP_SUMMARY"]
-    environ["GITHUB_REPOSITORY_OWNER"] = "JackPlowman"
     content = {
         "summary": [
             {"technology": "Markdown", "count": 1},
@@ -73,8 +72,6 @@ def test_write_output_file(mock_markdown_file: MagicMock) -> None:
         ]
     )
     mock_markdown_file.return_value.write.assert_called_once_with("tech_report.md")
-    # Cleanup
-    del environ["GITHUB_REPOSITORY_OWNER"]
 
 
 @patch(f"{FILE_PATH}.MarkdownFile")
@@ -105,7 +102,6 @@ def test_write_output_file__github_summary(mock_markdown_file: MagicMock) -> Non
         ],
     }
     environ["GITHUB_STEP_SUMMARY"] = "test.md"
-    environ["GITHUB_REPOSITORY_OWNER"] = "JackPlowman"
     # Act
     write_output_file(content)
     # Assert
@@ -145,7 +141,6 @@ def test_write_output_file__github_summary(mock_markdown_file: MagicMock) -> Non
     )
     # Cleanup
     del environ["GITHUB_STEP_SUMMARY"]
-    del environ["GITHUB_REPOSITORY_OWNER"]
 
 
 class TestMarkdownFile:
