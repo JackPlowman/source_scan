@@ -25,11 +25,14 @@ def test_write_output_file(mock_markdown_file: MagicMock) -> None:
             {
                 "project_name": "JackPlowman/source_scan",
                 "technologies_and_frameworks": [
-                    "Markdown",
-                    "Python",
-                    "Poetry",
-                    "Dependabot",
-                    "GitHub Actions",
+                    {
+                        "technology": "Markdown",
+                        "badge": "![Markdown](https://img.shields.io/badge/-Markdown-000000?style=flat&logo=markdown)",
+                    },
+                    {
+                        "technology": "Python",
+                        "badge": "![Python](https://img.shields.io/badge/-Python-3776AB?style=flat&logo=python&logoColor=white)",
+                    },
                 ],
             },
         ],
@@ -42,10 +45,23 @@ def test_write_output_file(mock_markdown_file: MagicMock) -> None:
         [
             call(level=1, title="Tech Report"),
             call(level=2, title="Summary"),
+            call(level=2, title="Repositories"),
         ]
     )
-    mock_markdown_file.return_value.add_table.assert_called_once_with(
-        content["summary"]
+    mock_markdown_file.return_value.add_table.assert_has_calls(
+        [
+            call(
+                content["summary"],
+            ),
+            call(
+                [
+                    {
+                        "Project Name": "JackPlowman/source_scan",
+                        "Technologies and Frameworks": "![Markdown](https://img.shields.io/badge/-Markdown-000000?style=flat&logo=markdown) ![Python](https://img.shields.io/badge/-Python-3776AB?style=flat&logo=python&logoColor=white)",  # noqa: E501
+                    }
+                ]
+            ),
+        ]
     )
     mock_markdown_file.return_value.write.assert_called_once_with("tech_report.md")
 
@@ -65,11 +81,14 @@ def test_write_output_file__github_summary(mock_markdown_file: MagicMock) -> Non
             {
                 "project_name": "JackPlowman/source_scan",
                 "technologies_and_frameworks": [
-                    "Markdown",
-                    "Python",
-                    "Poetry",
-                    "Dependabot",
-                    "GitHub Actions",
+                    {
+                        "technology": "Markdown",
+                        "badge": "![Markdown](https://img.shields.io/badge/-Markdown-000000?style=flat&logo=markdown)",
+                    },
+                    {
+                        "technology": "Python",
+                        "badge": "![Python](https://img.shields.io/badge/-Python-3776AB?style=flat&logo=python&logoColor=white)",
+                    },
                 ],
             },
         ],
@@ -85,8 +104,20 @@ def test_write_output_file__github_summary(mock_markdown_file: MagicMock) -> Non
             call(level=2, title="Summary"),
         ]
     )
-    mock_markdown_file.return_value.add_table.assert_called_once_with(
-        content["summary"]
+    mock_markdown_file.return_value.add_table.assert_has_calls(
+        [
+            call(
+                content["summary"],
+            ),
+            call(
+                [
+                    {
+                        "Project Name": "JackPlowman/source_scan",
+                        "Technologies and Frameworks": "![Markdown](https://img.shields.io/badge/-Markdown-000000?style=flat&logo=markdown) ![Python](https://img.shields.io/badge/-Python-3776AB?style=flat&logo=python&logoColor=white)",  # noqa: E501
+                    }
+                ]
+            ),
+        ]
     )
     mock_markdown_file.return_value.write.assert_has_calls(
         [call("tech_report.md"), call("test.md")]

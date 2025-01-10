@@ -19,6 +19,19 @@ def write_output_file(tech_report: TechReport) -> None:
     markdown_file.add_header(level=1, title="Tech Report")
     markdown_file.add_header(level=2, title="Summary")
     markdown_file.add_table(tech_report["summary"])
+    markdown_file.add_header(level=2, title="Repositories")
+    repositories_table_contents = [
+        {
+            "Project Name": project["project_name"],
+            "Technologies and Frameworks": " ".join(
+                technology["badge"]
+                for technology in project["technologies_and_frameworks"]
+            ),
+        }
+        for project in tech_report["repositories"]
+    ]
+    markdown_file.add_table(repositories_table_contents)
+
     markdown_file.write("tech_report.md")
 
     if "GITHUB_STEP_SUMMARY" in environ:
