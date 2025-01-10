@@ -21,10 +21,10 @@ runs:
     - name: Set up Just
       uses: extractions/setup-just@v2
     - name: Install Poetry Dependencies (Root Only)
-      if: ${{ inputs.root-only == "true" }}
+      if: ${{ inputs.root-only == 'true' }}
       shell: bash
       run: just install-root-only
     - name: Install Poetry Dependencies
-      if: ${{ inputs.root-only == "false" }}
+      if: ${{ inputs.root-only == 'false' }}
       shell: bash
       run: just install
