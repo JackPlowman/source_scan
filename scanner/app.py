@@ -1,6 +1,10 @@
 from structlog import get_logger, stdlib
 
-from .utils.custom_types import ProjectTechnologiesAndFrameworks, TechReport
+from .utils.custom_types import (
+    ProjectTechnologiesAndFrameworks,
+    SummaryOfTechnologiesAndFrameworks,
+    TechReport,
+)
 from .utils.github_interactions import retrieve_repositories, scrape_technologies
 from .utils.write_markdown import write_output_file
 
@@ -24,7 +28,7 @@ def summarise_tech_report(
         technologies_and_frameworks (list[ProjectTechnologiesAndFrameworks]):
             The list of project technologies and frameworks.
     """
-    summary = {}
+    summary: dict[str, int] = {}
     for project in technologies_and_frameworks:
         for technology in project["technologies_and_frameworks"]:
             if technology["badge"] in summary:
@@ -32,10 +36,10 @@ def summarise_tech_report(
             else:
                 summary[technology["badge"]] = 1
 
-    summary = [
+    summary_list: list[SummaryOfTechnologiesAndFrameworks] = [
         {"technology_badge": technology, "count": count}
         for technology, count in summary.items()
     ]
-    summary.sort(key=lambda x: x["count"], reverse=True)
+    summary_list.sort(key=lambda x: x["count"], reverse=True)
 
-    return {"summary": summary, "repositories": technologies_and_frameworks}
+    return {"summary": summary_list, "repositories": technologies_and_frameworks}

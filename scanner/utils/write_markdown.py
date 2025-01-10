@@ -69,3 +69,4 @@ class MarkdownFile:
             row_values = (str(value) for value in row.values())
             self.lines_of_content.append("|" + "|".join(row_values) + "|\n")
         self.lines_of_content.append("\n")
+        logger.warning("Added table to markdown file", table_contents=table_contents)
