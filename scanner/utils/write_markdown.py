@@ -18,6 +18,10 @@ def write_output_file(tech_report: TechReport) -> None:
     markdown_file = MarkdownFile()
     markdown_file.add_header(level=1, title="Tech Report")
     markdown_file.add_header(level=2, title="Summary")
+    logger.warning(
+        "Writing tech report to markdown file",
+        tech_report_summary=tech_report["summary"],
+    )
     markdown_file.add_table(tech_report["summary"])
     markdown_file.write("tech_report.md")
 
