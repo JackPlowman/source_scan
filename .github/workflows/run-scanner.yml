@@ -1,3 +1,4 @@
+#checkov:skip=CKV_GHA_7: Debug input only affects logging verbosity, not build output
 name: "Run Scanner"
 
 on:
