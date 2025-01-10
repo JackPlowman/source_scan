@@ -30,10 +30,11 @@ def write_output_file(tech_report: TechReport) -> None:
         }
         for project in tech_report["repositories"]
     ]
+    repositories_table_contents.sort(
+        key=lambda x: len(x["Technologies and Frameworks"]), reverse=True
+    )
     markdown_file.add_table(repositories_table_contents)
-
     markdown_file.write("tech_report.md")
-
     if "GITHUB_STEP_SUMMARY" in environ:
         logger.debug("Running in GitHub Actions, generating action summary")
         markdown_file.write(environ["GITHUB_STEP_SUMMARY"])
