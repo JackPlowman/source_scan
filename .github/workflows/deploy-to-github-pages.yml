@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       scanner_debug:
-        description: 'Turn on debug mode for the scanner'
+        description: "Turn on debug mode for the scanner"
         type: boolean
         required: false
         default: false
