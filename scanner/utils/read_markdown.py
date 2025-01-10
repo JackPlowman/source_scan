@@ -1,10 +1,12 @@
 from __future__ import annotations
 
 from re import findall
+from typing import TYPE_CHECKING
 
 from structlog import get_logger, stdlib
 
-from .custom_types import TechnologiesAndFrameworksDetail
+if TYPE_CHECKING:
+    from .custom_types import TechnologiesAndFrameworksDetail
 
 logger: stdlib.BoundLogger = get_logger()
 
