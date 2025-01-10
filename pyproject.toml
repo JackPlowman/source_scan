@@ -70,5 +70,5 @@ convention = "google" # Use Google docstring convention.
 known-first-party = ["scanner", "tests"]
 
 [tool.vulture]
-ignore_names = ["side_effect", "project_name", "technologies"]
+ignore_names = ["side_effect", "project_name", "technologies", "badge", "technology_badge"]
 ignore_decorators = ["dataclass"]
