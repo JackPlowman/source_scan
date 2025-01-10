@@ -1,9 +1,6 @@
-name: Deploy to GitHub Pages
+name: "Run Scanner"
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
     inputs:
       scanner_debug:
@@ -11,11 +8,6 @@ on:
         type: boolean
         required: false
         default: false
-  schedule:
-    - cron: "0 0 * * *"
-
-concurrency:
-  group: ${{ github.workflow }}
 
 permissions:
   contents: read
