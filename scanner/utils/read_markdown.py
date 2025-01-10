@@ -90,12 +90,12 @@ def find_markdown_badges(line_contents: str) -> list[TechnologiesAndFrameworksDe
     Returns:
         list[str]: The list of technologies and frameworks used in the repository.
     """
-    badge_matches = findall(r"(\[[^\)]*\]\([^\)]*\))", line_contents)
+    badge_matches = findall(r"(![\[][^\)]*\]\([^\)]*\))", line_contents)
     if not badge_matches:
         return []
     logger.debug("Found badges", badges=badge_matches)
     badge_names = [
-        badge_match.split("](")[0].replace("[", "") for badge_match in badge_matches
+        badge_match.split("](")[0].replace("![", "") for badge_match in badge_matches
     ]
     return [
         {
