@@ -1,4 +1,4 @@
-from os import environ, getenv
+from os import environ
 from pathlib import Path
 from typing import Self
 
