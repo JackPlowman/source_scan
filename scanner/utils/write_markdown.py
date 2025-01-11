@@ -74,7 +74,7 @@ class MarkdownFile:
 
     def add_table(self: Self, table_contents: list[dict]) -> None:
         """Add a table to the markdown file."""
-        headers = [header.title() for header in table_contents[0]]
+        headers = [header.replace("_", " ").title() for header in table_contents[0]]
         self.lines_of_content.append("|" + "|".join(headers) + "|\n")
         self.lines_of_content.append(
             "|" + "|".join(["-" * len(header) for header in headers]) + "|\n"
