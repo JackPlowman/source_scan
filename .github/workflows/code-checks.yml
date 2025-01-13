@@ -55,7 +55,7 @@ jobs:
       - name: Setup Python Dependencies
         uses: ./.github/actions/setup-dependencies
         with:
-          dev-dependencies: true
+          dev-dependencies: "true"
       - name: Check Python Code Quality (Ruff)
         run: just ruff-lint
         env:
@@ -90,7 +90,7 @@ jobs:
       - name: Setup Python Dependencies
         uses: ./.github/actions/setup-dependencies
         with:
-          dev-dependencies: true
+          dev-dependencies: "true"
       - name: Run Unit Tests
         run: just unit-test
       - name: Override Coverage Source Path for SonarCloud
@@ -185,7 +185,7 @@ jobs:
       - name: Setup Python Dependencies
         uses: ./.github/actions/setup-dependencies
         with:
-          dev-dependencies: true
+          dev-dependencies: "true"
       - name: Run zizmor 🌈
         run: poetry run zizmor --format sarif . > results.sarif
         env:
