@@ -5,7 +5,7 @@ requires-python = ">=3.13"
 dependencies = ["structlog==24.4.0", "pygithub==2.5.0"]
 
 [project.optional-dependencies]
-dev = ["pytest==8.3.4", "pytest-cov==6.0.0", "ruff==0.9.1", "vulture==2.14"]
+dev = ["pytest==8.3.4", "pytest-cov==6.0.0", "ruff==0.9.1", "vulture==2.14", "zizmor==1.1.0"]
 
 [tool.poetry]
 package-mode = false
