@@ -27,4 +27,4 @@ runs:
     - name: Install Poetry Dev Dependencies
       if: ${{ inputs.dev-dependencies == 'true' }}
       shell: bash
-      run: just install
+      run: just install-dev
