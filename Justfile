@@ -4,11 +4,11 @@
 
 # Install python dependencies
 install:
-    poetry install -E dev
+    poetry install
 
-# Install application python dependencies only
-install-root-only:
-    poetry install --only-root
+# Install python dependencies with dev dependencies
+install-dev:
+    poetry install -E dev
 
 # Run the scanner
 run:
