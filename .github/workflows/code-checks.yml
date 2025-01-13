@@ -19,7 +19,7 @@ jobs:
     permissions:
       statuses: write
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
@@ -47,13 +47,15 @@ jobs:
     permissions:
       security-events: write
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
           persist-credentials: false
-      - name: Setup Dependencies
+      - name: Setup Python Dependencies
         uses: ./.github/actions/setup-dependencies
+        with:
+          dev-dependencies: true
       - name: Check Python Code Quality (Ruff)
         run: just ruff-lint
         env:
@@ -87,6 +89,8 @@ jobs:
           persist-credentials: false
       - name: Setup Python Dependencies
         uses: ./.github/actions/setup-dependencies
+        with:
+          dev-dependencies: true
       - name: Run Unit Tests
         run: just unit-test
       - name: Override Coverage Source Path for SonarCloud
@@ -107,7 +111,7 @@ jobs:
       matrix:
         language: [python, actions]
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
@@ -159,7 +163,7 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
@@ -178,8 +182,10 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
-      - name: Setup Dependencies
+      - name: Setup Python Dependencies
         uses: ./.github/actions/setup-dependencies
+        with:
+          dev-dependencies: true
       - name: Run zizmor 🌈
         run: poetry run zizmor --format sarif . > results.sarif
         env:
