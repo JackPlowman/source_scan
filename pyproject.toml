@@ -1,21 +1,22 @@
 [project]
 name = "source-scan"
-version = "1.0.0"
+dynamic = ["version"]
 requires-python = ">=3.13"
+dependencies = [
+  "structlog=24.4.0",
+  "pygithub=2.5.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest=8.3.4",
+  "pytest-cov=6.0.0",
+  "ruff=0.9.1",
+  "vulture=2.14",
+]
 
 [tool.poetry]
 package-mode = false
-
-[tool.poetry.dependencies]
-python = "^3.13"
-structlog = "24.4.0"
-pygithub = "2.5.0"
-
-[tool.poetry.group.dev.dependencies]
-pytest = "8.3.4"
-pytest-cov = "6.0.0"
-ruff = "0.9.1"
-vulture = "2.14"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
@@ -57,14 +58,14 @@ exclude = [
   "_build",
 ]
 
-dummy-variable-rgx = "(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 
 [tool.ruff.lint.per-file-ignores]
 "**test_*.py" = ["S101", "D101", "D102", "D103", "SLF001", "FBT001"]
 "test_markdown.py" = ["E501"]
 
 [tool.ruff.lint.pydocstyle]
-convention = "google" # Use Google docstring convention.
+convention = "google"
 
 [tool.ruff.lint.isort]
 known-first-party = ["scanner", "tests"]
