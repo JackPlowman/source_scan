@@ -2,8 +2,8 @@ name: "Setup Dependencies"
 description: "Installs dependencies for the project"
 
 inputs:
-  dev-dependencies:
-    description: "Install development dependencies"
+  all-dependencies:
+    description: "Install development/testing dependencies"
     required: false
     default: "false"
 
@@ -21,10 +21,10 @@ runs:
     - name: Set up Just
       uses: extractions/setup-just@v2
     - name: Install Poetry Dependencies
-      if: ${{ inputs.dev-dependencies == 'false' }}
+      if: ${{ inputs.all-dependencies == 'false' }}
       shell: bash
       run: just install
-    - name: Install Poetry Dev Dependencies
-      if: ${{ inputs.dev-dependencies == 'true' }}
+    - name: Install Poetry All Dependencies
+      if: ${{ inputs.all-dependencies == 'true' }}
       shell: bash
-      run: just install-dev
+      run: just install-all

@@ -7,8 +7,8 @@ install:
     poetry install
 
 # Install python dependencies with dev dependencies
-install-dev:
-    poetry install -E dev
+install-all:
+    poetry install -E dev -E test
 
 # Run the scanner
 run:
@@ -18,6 +18,10 @@ run:
 run-with-defaults:
     DEBUG=true GITHUB_REPOSITORY_OWNER=JackPlowman just run
 
+# ------------------------------------------------------------------------------
+# Test Commands
+# ------------------------------------------------------------------------------
+
 # Runs unit tests
 unit-test:
     poetry run pytest scanner --cov=. --cov-report=xml
@@ -25,6 +29,10 @@ unit-test:
 # Runs unit tests with debug
 unit-test-debug:
     poetry run pytest scanner --cov=. --cov-report=xml -vv
+
+# Run markdown tests
+markdown-test:
+    poetry run pytest tests/markdown
 
 # ------------------------------------------------------------------------------
 # Cleaning Commands
@@ -46,7 +54,7 @@ clean:
     \) -print | xargs rm -rfv
 
 # ------------------------------------------------------------------------------
-# Ruff - Python Linting and Formating
+# Ruff - Python Linting and Formatting
 # Set up ruff red-knot when it's ready
 # ------------------------------------------------------------------------------
 
@@ -77,7 +85,7 @@ ruff-format-fix:
 
 # Check for unused code
 vulture:
-    poetry run vulture .
+    poetry run vulture scanner
 
 # ------------------------------------------------------------------------------
 # Prettier - File Formatting
