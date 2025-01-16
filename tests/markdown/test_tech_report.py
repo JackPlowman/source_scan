@@ -12,7 +12,7 @@ def test_tech_report() -> None:
     # Arrange
     expected_title = "Tech Report"
     expected_l2_titles = ["Summary", "Repositories"]
-    expected_summary_headers = ["Technology_Badge", "Count"]
+    expected_summary_headers = ["Technology Badge", "Count"]
     expected_repositories_headers = ["Project Name", "Technologies And Frameworks"]
 
     # Act
