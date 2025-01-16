@@ -22,7 +22,7 @@ jobs:
       pages: write
       id-token: write
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
@@ -35,10 +35,33 @@ jobs:
           GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
           FORCE_COLOR: true
           DEBUG: ${{ inputs.scanner_debug }}
-      - name: Rename Scanner Results
-        run: mv tech_report.md index.md
       - name: Upload Scanner Results
         uses: actions/upload-artifact@v4.6.0
         with:
-          path: index.md
+          path: tech_report.md
           name: scanner-results
+
+  markdown-tests:
+    name: Markdown Tests
+    runs-on: ubuntu-latest
+    needs: run-scanner
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Download Scanner Results
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: scanner-results
+      - name: Setup Python Dependencies
+        uses: ./.github/actions/setup-dependencies
+        with:
+          all-dependencies: true
+      - name: Run Markdown Tests
+        run: just markdown-test

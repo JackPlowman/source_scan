@@ -23,7 +23,7 @@ jobs:
       pages: write
       id-token: write
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
@@ -35,24 +35,47 @@ jobs:
         env:
           GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
           FORCE_COLOR: true
-      - name: Rename Scanner Results
-        run: mv tech_report.md index.md
       - name: Upload Scanner Results
         uses: actions/upload-artifact@v4.6.0
         with:
-          path: index.md
+          path: tech_report.md
           name: scanner-results
+
+  markdown-tests:
+    name: Markdown Tests
+    runs-on: ubuntu-latest
+    needs: run-scanner
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Download Scanner Results
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: scanner-results
+      - name: Setup Python Dependencies
+        uses: ./.github/actions/setup-dependencies
+        with:
+          all-dependencies: true
+      - name: Run Markdown Tests
+        run: just markdown-test
 
   build:
     name: Build GitHub Pages
-    needs: run-scanner
+    needs: markdown-tests
     runs-on: ubuntu-latest
     permissions:
       contents: write
       pages: write
       id-token: write
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v4.2.2
         with:
           sparse-checkout: .github/github_pages_jekyll_config.yml
@@ -64,6 +87,8 @@ jobs:
         uses: actions/download-artifact@v4.1.8
         with:
           name: scanner-results
+      - name: Rename Scanner Results
+        run: mv tech_report.md index.md
       - name: Build
         uses: actions/jekyll-build-pages@v1.0.13
         with:
@@ -93,7 +118,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: deploy
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
