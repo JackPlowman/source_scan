@@ -66,4 +66,4 @@ jobs:
         with:
           all-dependencies: true
       - name: Run Markdown Tests
-        run: just markdown-tests
+        run: just markdown-test
