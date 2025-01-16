@@ -81,14 +81,14 @@ jobs:
           sparse-checkout: .github/github_pages_jekyll_config.yml
           sparse-checkout-cone-mode: false
           persist-credentials: false
-      - name: Rename Scanner Results
-        run: mv tech_report.md index.md
       - name: Add Jekyll Config
         run: mv .github/github_pages_jekyll_config.yml _config.yml
       - name: Get Scanner Results
         uses: actions/download-artifact@v4.1.8
         with:
           name: scanner-results
+      - name: Rename Scanner Results
+        run: mv tech_report.md index.md
       - name: Build
         uses: actions/jekyll-build-pages@v1.0.13
         with:
