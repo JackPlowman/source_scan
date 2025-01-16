@@ -35,12 +35,10 @@ jobs:
           GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
           FORCE_COLOR: true
           DEBUG: ${{ inputs.scanner_debug }}
-      - name: Rename Scanner Results
-        run: mv tech_report.md index.md
       - name: Upload Scanner Results
         uses: actions/upload-artifact@v4.6.0
         with:
-          path: index.md
+          path: tech_report.md
           name: scanner-results
 
   markdown-tests:
@@ -65,7 +63,5 @@ jobs:
         uses: ./.github/actions/setup-dependencies
         with:
           all-dependencies: true
-      - name: LS
-        run: ls
       - name: Run Markdown Tests
         run: just markdown-test
