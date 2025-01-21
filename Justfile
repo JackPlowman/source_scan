@@ -18,6 +18,10 @@ run:
 run-with-defaults:
     DEBUG=true GITHUB_REPOSITORY_OWNER=JackPlowman just run
 
+# Validates Pyproject
+pyproject-check:
+    poetry check
+
 # ------------------------------------------------------------------------------
 # Test Commands
 # ------------------------------------------------------------------------------
