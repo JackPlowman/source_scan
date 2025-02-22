@@ -4,23 +4,19 @@
 
 # Install python dependencies
 install:
-    poetry install
+    uv sync
 
 # Install python dependencies with dev dependencies
 install-all:
-    poetry install -E dev -E test
+    uv sync --extra dev --extra test
 
 # Run the scanner
 run:
-    poetry run python -m scanner
+    uv run python -m scanner
 
 # Run the scanner with defaults
 run-with-defaults:
     DEBUG=true GITHUB_REPOSITORY_OWNER=JackPlowman just run
-
-# Validates Pyproject
-pyproject-check:
-    poetry check
 
 # ------------------------------------------------------------------------------
 # Test Commands
@@ -28,15 +24,15 @@ pyproject-check:
 
 # Runs unit tests
 unit-test:
-    poetry run pytest scanner --cov=. --cov-report=xml
+    uv run pytest scanner --cov=. --cov-report=xml
 
 # Runs unit tests with debug
 unit-test-debug:
-    poetry run pytest scanner --cov=. --cov-report=xml -vv
+    uv run pytest scanner --cov=. --cov-report=xml -vv
 
 # Run markdown tests
 markdown-test:
-    poetry run pytest tests/markdown
+    uv run pytest tests/markdown
 
 # ------------------------------------------------------------------------------
 # Cleaning Commands
@@ -69,19 +65,19 @@ ruff-fix:
 
 # Check for Ruff issues
 ruff-lint:
-    poetry run ruff check .
+    uv run ruff check .
 
 # Fix Ruff lint issues
 ruff-lint-fix:
-    poetry run ruff check . --fix
+    uv run ruff check . --fix
 
 # Check for Ruff format issues
 ruff-format:
-    poetry run ruff format --check .
+    uv run ruff format --check .
 
 # Fix Ruff format issues
 ruff-format-fix:
-    poetry run ruff format .
+    uv run ruff format .
 
 # ------------------------------------------------------------------------------
 # Other Python Tools
@@ -89,7 +85,7 @@ ruff-format-fix:
 
 # Check for unused code
 vulture:
-    poetry run vulture scanner
+    uv run vulture scanner
 
 # ------------------------------------------------------------------------------
 # Prettier - File Formatting

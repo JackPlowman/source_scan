@@ -16,7 +16,7 @@ markdown:
 dependencies:
   - any:
       - changed-files:
-          - any-glob-to-any-file: ["**/poetry.lock"]
+          - any-glob-to-any-file: ["**/uv.lock"]
       - head-branch: ["^dependabot"]
 python:
   - any:

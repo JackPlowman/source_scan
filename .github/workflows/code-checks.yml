@@ -67,8 +67,6 @@ jobs:
         with:
           sarif_file: ruff-results.sarif
           wait-for-processing: true
-      - name: Validates Pyproject
-        run: just pyproject-check
       - name: Check Python Code Format (Ruff)
         run: just ruff-format
         env:
@@ -190,7 +188,7 @@ jobs:
         with:
           all-dependencies: "true"
       - name: Run zizmor 🌈
-        run: poetry run zizmor --format sarif . > results.sarif
+        run: uv run zizmor --format sarif . > results.sarif
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload SARIF file

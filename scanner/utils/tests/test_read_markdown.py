@@ -29,8 +29,8 @@ def test_find_technologies_and_frameworks() -> None:
             "badge": "![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)",
         },
         {
-            "technology": "Poetry",
-            "badge": "![Poetry](https://img.shields.io/badge/poetry-%23150458.svg?style=for-the-badge&logo=poetry&logoColor=white)",
+            "technology": "UV",
+            "badge": "![UV](https://img.shields.io/badge/uv-%23150458.svg?style=for-the-badge&logo=uv&logoColor=white)",
         },
         {
             "technology": "Dependabot",
@@ -86,7 +86,7 @@ def test_find_table_data_start_index() -> None:
         "| Category | Technologies and Frameworks                                                                                                                                                                                                                             |",  # noqa: E501
         "| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |",  # noqa: E501
         "| Frontend | ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white) ![Astro](https://img.shields.io/badge/astro-%232C2052.svg?style=for-the-badge&logo=astro&logoColor=white)                      |",  # noqa: E501
-        "| Backend  | ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Poetry](https://img.shields.io/badge/poetry-%23150458.svg?style=for-the-badge&logo=poetry&logoColor=white)                                     |",  # noqa: E501
+        "| Backend  | ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![UV](https://img.shields.io/badge/uv-%23150458.svg?style=for-the-badge&logo=uv&logoColor=white)                                     |",  # noqa: E501
         "| CI/CD    | ![Dependabot](https://img.shields.io/badge/dependabot-025E8C?style=for-the-badge&logo=dependabot&logoColor=white) ![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white) |",  # noqa: E501
         "",
     ]
@@ -116,16 +116,16 @@ def test_find_table_data_start_index() -> None:
         ),
         (
             "| Backend  | ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python"
-            "&logoColor=ffdd54) ![Poetry](https://img.shields.io/badge/poetry-%23150458.svg?style=for-the-badge"
-            "&logo=poetry&logoColor=white)                                     |",
+            "&logoColor=ffdd54) ![UV](https://img.shields.io/badge/uv-%23150458.svg?style=for-the-badge"
+            "&logo=uv&logoColor=white)                                     |",
             [
                 {
                     "technology": "Python",
                     "badge": "![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)",
                 },
                 {
-                    "technology": "Poetry",
-                    "badge": "![Poetry](https://img.shields.io/badge/poetry-%23150458.svg?style=for-the-badge&logo=poetry&logoColor=white)",
+                    "technology": "UV",
+                    "badge": "![UV](https://img.shields.io/badge/uv-%23150458.svg?style=for-the-badge&logo=uv&logoColor=white)",
                 },
             ],
         ),
