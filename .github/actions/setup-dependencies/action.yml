@@ -10,21 +10,18 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Install Poetry
-      shell: bash
-      run: pipx install poetry==2.0.0
-    - name: Install Python 3.13 with Poetry Cache
-      uses: actions/setup-python@v5.3.0
+    - name: Install Python and UV
+      uses: astral-sh/setup-uv@v5.2.2
       with:
-        python-version-file: "pyproject.toml"
-        cache: "poetry"
+        pyproject-file: "pyproject.toml"
+        enable-cache: true
     - name: Set up Just
       uses: extractions/setup-just@v2
-    - name: Install Poetry Dependencies
+    - name: Install UV Dependencies
       if: ${{ inputs.all-dependencies == 'false' }}
       shell: bash
       run: just install
-    - name: Install Poetry All Dependencies
+    - name: Install All UV Dependencies
       if: ${{ inputs.all-dependencies == 'true' }}
       shell: bash
       run: just install-all
