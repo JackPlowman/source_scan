@@ -17,7 +17,7 @@ def test_write_output_file(mock_markdown_file: MagicMock) -> None:
         "summary": [
             {"technology": "Markdown", "count": 1},
             {"technology": "Python", "count": 1},
-            {"technology": "Poetry", "count": 1},
+            {"technology": "UV", "count": 1},
             {"technology": "Dependabot", "count": 1},
             {"technology": "GitHub Actions", "count": 1},
         ],
@@ -56,7 +56,7 @@ def test_write_output_file(mock_markdown_file: MagicMock) -> None:
                 [
                     {"technology": "Markdown", "count": 1},
                     {"technology": "Python", "count": 1},
-                    {"technology": "Poetry", "count": 1},
+                    {"technology": "UV", "count": 1},
                     {"technology": "Dependabot", "count": 1},
                     {"technology": "GitHub Actions", "count": 1},
                 ]
@@ -81,7 +81,7 @@ def test_write_output_file__github_summary(mock_markdown_file: MagicMock) -> Non
         "summary": [
             {"technology": "Markdown", "count": 1},
             {"technology": "Python", "count": 1},
-            {"technology": "Poetry", "count": 1},
+            {"technology": "UV", "count": 1},
             {"technology": "Dependabot", "count": 1},
             {"technology": "GitHub Actions", "count": 1},
         ],
@@ -121,7 +121,7 @@ def test_write_output_file__github_summary(mock_markdown_file: MagicMock) -> Non
                 [
                     {"technology": "Markdown", "count": 1},
                     {"technology": "Python", "count": 1},
-                    {"technology": "Poetry", "count": 1},
+                    {"technology": "UV", "count": 1},
                     {"technology": "Dependabot", "count": 1},
                     {"technology": "GitHub Actions", "count": 1},
                 ]

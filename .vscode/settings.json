@@ -34,6 +34,6 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
-    "pyproject.toml": "__init__.py, poetry.lock, coverage.xml, .coverage, .gitignore"
+    "pyproject.toml": "__init__.py, uv.lock, coverage.xml, .coverage, .gitignore"
   }
 }
