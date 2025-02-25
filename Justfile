@@ -63,6 +63,10 @@ ruff-fix:
     just ruff-format-fix
     just ruff-lint-fix
 
+# Run all ruff checks
+ruff-checks:
+    just ruff-lint ruff-format
+
 # Check for Ruff issues
 ruff-lint:
     uv run ruff check .
