@@ -104,12 +104,19 @@ prettier-format:
 # ------------------------------------------------------------------------------
 
 # Format the Just code
-just-format:
+format:
     just --fmt --unstable
 
 # Check for Just format issues
-just-format-check:
+format-check:
     just --fmt --check --unstable
+
+# ------------------------------------------------------------------------------
+# gitleaks
+# ------------------------------------------------------------------------------
+
+gitleaks-detect:
+    gitleaks detect --source . > /dev/null
 
 # ------------------------------------------------------------------------------
 # Git Hooks
