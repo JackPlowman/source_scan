@@ -1,8 +1,23 @@
-# labels auto-assigned to PR, keep in sync with labels.yml
+# labels auto assigned to PR, keep in sync with labels.yml
+# Type
 documentation:
   - any:
       - changed-files:
           - any-glob-to-any-file: ["README.md", "*.md", "docs/**"]
+dependencies:
+  - any:
+      - changed-files:
+          - any-glob-to-any-file: ["**/uv.lock", "package-lock.json"]
+      - head-branch: ["^dependabot"]
+configurations:
+  - any:
+      - changed-files:
+          - any-glob-to-any-file:
+              [
+                ".github/other-configurations/*",
+                ".github/super-linter-configurations/*",
+              ]
+# Language
 markdown:
   - any:
       - changed-files:
@@ -13,23 +28,28 @@ markdown:
                 "LICENSE",
                 ".github/pull_request_template.md",
               ]
-dependencies:
-  - any:
-      - changed-files:
-          - any-glob-to-any-file: ["**/uv.lock"]
-      - head-branch: ["^dependabot"]
 python:
   - any:
       - changed-files:
           - any-glob-to-any-file: ["*.py", "**/*.py"]
-just:
+typescript:
   - any:
       - changed-files:
-          - any-glob-to-any-file: ["Justfile", "**/*.just"]
+          - any-glob-to-any-file:
+              ["*.ts", "*.tsx", "**/*.ts", "**/*.tsx", "**/tsconfig.json"]
 shell:
   - any:
       - changed-files:
           - any-glob-to-any-file: ["**/*.sh"]
+just:
+  - any:
+      - changed-files:
+          - any-glob-to-any-file: ["Justfile", "**/*.just"]
+# Components
+git_hooks:
+  - any:
+      - changed-files:
+          - any-glob-to-any-file: ["lefthook.yml"]
 github_actions:
   - any:
       - changed-files:
@@ -38,7 +58,7 @@ scanner:
   - any:
       - changed-files:
           - any-glob-to-any-file: ["scanner/**"]
-git_hooks:
+tests:
   - any:
       - changed-files:
-          - any-glob-to-any-file: ["githooks/**"]
+          - any-glob-to-any-file: ["tests/**"]
