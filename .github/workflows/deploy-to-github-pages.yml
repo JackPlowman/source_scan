@@ -56,7 +56,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       - name: Download Scanner Results
-        uses: actions/download-artifact@v4.1.8
+        uses: actions/download-artifact@v4.1.9
         with:
           name: scanner-results
       - name: Setup Python Dependencies
@@ -84,7 +84,7 @@ jobs:
       - name: Add Jekyll Config
         run: mv .github/github_pages_jekyll_config.yml _config.yml
       - name: Get Scanner Results
-        uses: actions/download-artifact@v4.1.8
+        uses: actions/download-artifact@v4.1.9
         with:
           name: scanner-results
       - name: Rename Scanner Results
