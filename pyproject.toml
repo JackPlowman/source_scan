@@ -19,7 +19,7 @@ test = [
 ]
 
 [tool.uv]
-required-version = "0.6.3"
+required-version = "0.6.6"
 package = false
 
 [tool.ruff]
