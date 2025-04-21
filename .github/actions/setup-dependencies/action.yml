@@ -16,7 +16,7 @@ runs:
         pyproject-file: "pyproject.toml"
         enable-cache: true
     - name: Set up Just
-      uses: extractions/setup-just@v2
+      uses: extractions/setup-just@e33e0265a09d6d736e2ee1e0eb685ef1de4669ff # v3
     - name: Install UV Dependencies
       if: ${{ inputs.all-dependencies == 'false' }}
       shell: bash
