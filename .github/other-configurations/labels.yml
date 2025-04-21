@@ -32,22 +32,6 @@
 - color: d876e3
   name: wontfix
   description: The issue is expected and will not be fixed
-# Release Please
-- color: ededed
-  name: "autorelease: pending"
-  description: The release is pending and awaiting further actions
-- color: ededed
-  name: "autorelease: tagged"
-  description: The release has been tagged
-- color: ededed
-  name: "autorelease: triggered"
-  description: A release has been triggered but not yet completed
-- color: ededed
-  name: "autorelease: snapshot"
-  description: A snapshot release that is not intended for production
-- color: ededed
-  name: "autorelease: published"
-  description: A release has been published
 # Languages
 - color: 000000
   name: github_actions
