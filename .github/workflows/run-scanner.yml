@@ -36,7 +36,7 @@ jobs:
           FORCE_COLOR: true
           DEBUG: ${{ inputs.scanner_debug }}
       - name: Upload Scanner Results
-        uses: actions/upload-artifact@v4.6.1
+        uses: actions/upload-artifact@v4.6.2
         with:
           path: tech_report.md
           name: scanner-results
@@ -56,7 +56,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       - name: Download Scanner Results
-        uses: actions/download-artifact@v4.1.8
+        uses: actions/download-artifact@v4.2.1
         with:
           name: scanner-results
       - name: Setup Python Dependencies
