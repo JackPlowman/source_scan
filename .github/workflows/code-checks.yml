@@ -68,6 +68,8 @@ jobs:
         with:
           sarif_file: ruff-results.sarif
           wait-for-processing: true
+      - name: UV Lock Check
+        run: just uv-lock-check
       - name: Check Python Code Format (Ruff)
         run: just ruff-format
         env:
