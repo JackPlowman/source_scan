@@ -18,6 +18,10 @@ run:
 run-with-defaults:
     DEBUG=true GITHUB_REPOSITORY_OWNER=JackPlowman just run
 
+# Check UV lock
+uv-lock-check:
+    uv lock --check
+
 # ------------------------------------------------------------------------------
 # Test Commands
 # ------------------------------------------------------------------------------
