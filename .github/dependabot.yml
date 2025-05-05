@@ -8,9 +8,8 @@ updates:
     commit-message:
       prefix: "deps(github-actions)"
     schedule:
-      interval: "daily"
-      time: "01:00"
-      timezone: "Europe/London"
+      interval: "cron"
+      cronjob: "30 7 * * *"
     target-branch: "main"
     groups:
       github-actions:
@@ -25,9 +24,8 @@ updates:
     commit-message:
       prefix: "deps(python)"
     schedule:
-      interval: "daily"
-      time: "01:00"
-      timezone: "Europe/London"
+      interval: "cron"
+      cronjob: "30 7 * * *"
     target-branch: "main"
     groups:
       python:
