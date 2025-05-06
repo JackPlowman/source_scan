@@ -10,11 +10,15 @@ updates:
     schedule:
       interval: "cron"
       cronjob: "30 7 * * *"
+      timezone: "Europe/London"
     target-branch: "main"
     groups:
       github-actions:
+        applies-to: "version-updates"
         patterns:
           - "*"
+        exclude-patterns:
+          - "super-linter/*"
         update-types:
           - "patch"
           - "minor"
@@ -26,9 +30,11 @@ updates:
     schedule:
       interval: "cron"
       cronjob: "30 7 * * *"
+      timezone: "Europe/London"
     target-branch: "main"
     groups:
       python:
+        applies-to: "version-updates"
         patterns:
           - "*"
         update-types:
