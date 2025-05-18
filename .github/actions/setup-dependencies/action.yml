@@ -2,8 +2,12 @@ name: "Setup Dependencies"
 description: "Installs dependencies for the project"
 
 inputs:
-  all-dependencies:
+  install-all-dependencies:
     description: "Install development/testing dependencies"
+    required: false
+    default: "false"
+  install-browsers:
+    description: "Install browsers for testing"
     required: false
     default: "false"
 
@@ -22,3 +26,7 @@ runs:
       if: ${{ inputs.all-dependencies == 'true' }}
       shell: bash
       run: just install-all
+    - name: Install Playwright Browsers
+      if: ${{ inputs.install-browsers == 'true' }}
+      shell: bash
+      run: just playwright-install

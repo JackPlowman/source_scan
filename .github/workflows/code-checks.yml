@@ -64,7 +64,7 @@ jobs:
       - name: Setup Python Dependencies
         uses: ./.github/actions/setup-dependencies
         with:
-          all-dependencies: "true"
+          install-all-dependencies: "true"
       - name: Check Python Code Quality (Ruff)
         run: just ruff-lint
         env:
@@ -101,7 +101,7 @@ jobs:
       - name: Setup Python Dependencies
         uses: ./.github/actions/setup-dependencies
         with:
-          all-dependencies: "true"
+          install-all-dependencies: "true"
       - name: Run Unit Tests
         run: just unit-test
       - name: SonarCloud Scan

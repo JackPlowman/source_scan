@@ -62,6 +62,6 @@ jobs:
       - name: Setup Python Dependencies
         uses: ./.github/actions/setup-dependencies
         with:
-          all-dependencies: true
+          install-all-dependencies: true
       - name: Run Markdown Tests
         run: just markdown-test
