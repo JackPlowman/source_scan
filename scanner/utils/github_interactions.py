@@ -23,7 +23,7 @@ def retrieve_repositories() -> PaginatedList[Repository]:
     github = Github()
     repository_owner = getenv("GITHUB_REPOSITORY_OWNER")
     repositories = github.search_repositories(
-        query=f"user:{repository_owner} archived:false"
+        query=f"user:{repository_owner} archived:false is:public",
     )
     logger.info(
         "Retrieved repositories to analyse",
