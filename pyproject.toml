@@ -7,7 +7,14 @@ dependencies = ["structlog==25.3.0", "pygithub==2.6.1"]
 [project.optional-dependencies]
 dev = ["pytest==8.3.5", "pytest-cov==6.1.1", "ruff==0.11.10", "vulture==2.14"]
 diagrams = ["diagrams==0.24.4", "ruff==0.11.10"]
-test = ["pytest==8.3.5", "markdown2==2.5.3", "beautifulsoup4==4.13.3"]
+test = [
+  "pytest==8.3.5",
+  "markdown2==2.5.3",
+  "beautifulsoup4==4.13.3",
+  "playwright==1.52.0",
+  "pytest-playwright==0.7.0",
+  "pytest-rerunfailures==15.0",
+]
 
 [tool.uv]
 required-version = "0.7.5"
