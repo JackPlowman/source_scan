@@ -38,6 +38,20 @@ unit-test-debug:
 markdown-test:
     uv run pytest tests/markdown
 
+export DEFAULT_PROJECT_URL := "https://jackplowman.github.io/source_scan"
+
+# Run UI tests
+ui-tests $PROJECT_URL=DEFAULT_PROJECT_URL $browser="chromium":
+    uv run pytest tests/ui -vv --reruns 2 --browser ${browser}
+
+# Run UI Tests in a specific browser
+ui-tests-ci $browser:
+    just ui-tests $DEFAULT_PROJECT_URL ${browser}
+
+# Install playwright dependencies
+playwright-install:
+    uv run playwright install --with-deps
+
 # ------------------------------------------------------------------------------
 # Cleaning Commands
 # ------------------------------------------------------------------------------
