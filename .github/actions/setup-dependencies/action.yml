@@ -2,8 +2,12 @@ name: "Setup Dependencies"
 description: "Installs dependencies for the project"
 
 inputs:
-  all-dependencies:
+  install-all-dependencies:
     description: "Install development/testing dependencies"
+    required: false
+    default: "false"
+  install-browsers:
+    description: "Install browsers for testing"
     required: false
     default: "false"
 
@@ -15,10 +19,14 @@ runs:
     - name: Set up Just
       uses: extractions/setup-just@e33e0265a09d6d736e2ee1e0eb685ef1de4669ff # v3.0.0
     - name: Install UV Dependencies
-      if: ${{ inputs.all-dependencies == 'false' }}
+      if: ${{ inputs.install-all-dependencies == 'false' }}
       shell: bash
       run: just install
     - name: Install All UV Dependencies
-      if: ${{ inputs.all-dependencies == 'true' }}
+      if: ${{ inputs.install-all-dependencies == 'true' }}
       shell: bash
       run: just install-all
+    - name: Install Playwright Browsers
+      if: ${{ inputs.install-browsers == 'true' }}
+      shell: bash
+      run: just playwright-install
