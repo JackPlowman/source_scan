@@ -1,7 +1,7 @@
 {
   "version": "0.18.1",
-  "uuid": "a6e8c6fd-e1a2-4270-8fa7-b213d8eb2975",
-  "timestamp": "2025-05-18T21:42:07+00:00",
+  "uuid": "77f6370d-a7aa-4859-a701-6a87a3ed7a48",
+  "timestamp": "2025-05-18T21:45:33+00:00",
   "root": "/github/workspace",
   "repository": {
     "owner": "JackPlowman",
@@ -140,7 +140,7 @@
         ]
       },
       "scanner/utils/github_interactions.py": {
-        "checksum": "c42f75289dccdd1a17971f8caee9dff8",
+        "checksum": "360898978126e795e5ce9965a005ff4d",
         "language": "Python",
         "loc": 28,
         "profile": [28, 0, 0, 0],
