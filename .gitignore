@@ -156,6 +156,7 @@ cython_debug/
 
 # Custom
 ruff_cache/
+mutants
 
 # Markdown
 tech_report.md

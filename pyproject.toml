@@ -88,5 +88,5 @@ ignore_names = [
 ]
 
 [tool.mutmut]
-paths_to_mutate = ["scanner/"]
-tests_dir = ["scanner/"]
+paths_to_mutate = ["scanner/", "scanner/utils/"]
+tests_dir = ["scanner/", "scanner/utils/"]
