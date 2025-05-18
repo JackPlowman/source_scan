@@ -1,30 +1,23 @@
 from diagrams import Diagram
 from diagrams.c4 import (
     Container,
-    Database,
     Person,
     Relationship,
     SystemBoundary,
 )
 
-with Diagram("../docs/diagrams/c4", direction="TB", graph_attr={"splines": "spline"}):
+with Diagram("docs/diagrams/c4", direction="TB", graph_attr={"splines": "spline"}):
     user = Person(name="User")
 
-    with SystemBoundary("CountSloc"):
+    with SystemBoundary("source_scan"):
         scanner = Container(name="Scanner", technology="Python")
 
         with SystemBoundary("GitHub Pages"):
-            data_file = Database(
-                name="Data File",
-                description="File containing the data to be scanned.",
-                technology="JSON",
-            )
-            dashboard = Container(
-                name="Dashboard",
-                description="Web application for viewing statistics and metrics.",
-                technology="TypeScript",
+            rendered_markdown = Container(
+                name="Rendered Markdown",
+                description="Markdown files rendered to HTML.",
+                technology="HTML",
             )
 
-    user >> Relationship("Uses") >> dashboard
-    scanner >> Relationship("Creates") >> data_file
-    dashboard >> Relationship("Reads") >> data_file
+    user >> Relationship("Uses") >> rendered_markdown
+    rendered_markdown << Relationship("Generates") << scanner

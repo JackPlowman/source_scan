@@ -58,8 +58,16 @@ clean:
     \) -print | xargs rm -rfv
 
 # ------------------------------------------------------------------------------
+# Create Diagrams
+# ------------------------------------------------------------------------------
+
+# Create the C4 diagram
+create-c4-diagram:
+    uv run python diagrams/c4.py
+
+# ------------------------------------------------------------------------------
 # Ruff - Python Linting and Formatting
-# Set up ruff red-knot when it's ready
+# Set up ty when it's ready
 # ------------------------------------------------------------------------------
 
 # Fix all Ruff issues

@@ -19,3 +19,9 @@ Allowed row names:
 All row names are case sensitive and optional.
 
 An example can be found in the [PROJECT_TECHNOLOGIES.md](docs/PROJECT_TECHNOLOGIES.md) file.
+
+## Architecture Diagrams
+
+### C4
+
+![c4](./docs/diagrams/c4.png)
