@@ -3,9 +3,9 @@ from unittest.mock import MagicMock, call, patch
 
 import pytest
 
-from source_scan.scanner.utils.write_markdown import MarkdownFile, write_output_file
+from scanner.utils.write_markdown import MarkdownFile, write_output_file
 
-FILE_PATH = "source_scan.scanner.utils.write_markdown"
+FILE_PATH = "scanner.utils.write_markdown"
 
 
 @patch(f"{FILE_PATH}.MarkdownFile")
