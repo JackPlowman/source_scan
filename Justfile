@@ -34,6 +34,10 @@ unit-test:
 unit-test-debug:
     uv run pytest scanner --cov=. --cov-report=xml -vv
 
+# Mutation tests
+mutmut-run:
+    uv run mutmut run
+
 # Run markdown tests
 markdown-test:
     uv run pytest tests/markdown

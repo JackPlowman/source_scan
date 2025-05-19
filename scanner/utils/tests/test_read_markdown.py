@@ -12,7 +12,7 @@ from scanner.utils.read_markdown import (
 
 def test_find_technologies_and_frameworks() -> None:
     # Arrange
-    with Path.open("docs/PROJECT_TECHNOLOGIES.md") as file:
+    with Path.open("scanner/utils/tests/data/PROJECT_TECHNOLOGIES.md") as file:
         file_contents = file.read()
 
     # Act
