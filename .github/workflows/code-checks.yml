@@ -162,4 +162,4 @@ jobs:
         with:
           install-all-dependencies: "true"
       - name: Run Mutation Tests
-        run: just mutmut-run
+        run: uv run mutmut run

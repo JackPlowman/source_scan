@@ -36,8 +36,6 @@ unit-test-debug:
 
 # Mutation tests
 mutmut-run:
-    rm -rf mutants
-    rm -rf tests
     uv run mutmut run
 
 # Run markdown tests
