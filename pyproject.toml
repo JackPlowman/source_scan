@@ -36,6 +36,7 @@ ignore = [
   "D104",    # Ignore missing docstring in public package
   "D100",    # Ignore missing docstring in public module
   "SIM112",  # Ignore Lowercase environment variables (used for GitHub actions)
+  "N999",  # Ignore upstream folder names
 ]
 
 fixable = ["ALL"]
