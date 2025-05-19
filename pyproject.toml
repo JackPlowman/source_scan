@@ -90,4 +90,7 @@ ignore_names = [
 [tool.mutmut]
 paths_to_mutate = ["scanner"]
 tests_dir = ["scanner/tests", "scanner/utils/tests"]
-do_not_mutate = ["*/tests/test_*.py", "test_*.py", "__init__.py", "conftest.py"]
+do_not_mutate = ["**/tests/*", "test_*.py", "__init__.py", "conftest.py"]
+
+[tool.pytest.ini_options]
+addopts = "--ignore ./mutants"
