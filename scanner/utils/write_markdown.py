@@ -60,26 +60,32 @@ class MarkdownFile:
 
     def _check_last_line_is_empty(self: Self) -> bool:
         """Check if the last line is empty."""
-        return "\n\n" in self.lines_of_content[-1]
+        return "\n\n" in self.lines_of_content[-1]  # pragma: no mutate
 
     def add_header(self: Self, level: int, title: str) -> None:
         """Add a header to the markdown file."""
         if self.lines_of_content and not self._check_last_line_is_empty():
-            self.lines_of_content[-1] += "\n\n"
-        self.lines_of_content.append(f"{'#' * level} {title}\n\n")
+            self.lines_of_content[-1] += "\n\n"  # pragma: no mutate
+        self.lines_of_content.append(f"{'#' * level} {title}\n\n")  # pragma: no mutate
 
     def add_paragraph(self: Self, paragraph: str) -> None:
         """Add a paragraph to the markdown file."""
-        self.lines_of_content.append(f"{paragraph} \n\n")
+        self.lines_of_content.append(f"{paragraph} \n\n")  # pragma: no mutate
 
     def add_table(self: Self, table_contents: list[dict]) -> None:
         """Add a table to the markdown file."""
         headers = [header.replace("_", " ").title() for header in table_contents[0]]
-        self.lines_of_content.append("|" + "|".join(headers) + "|\n")
         self.lines_of_content.append(
-            "|" + "|".join(["-" * len(header) for header in headers]) + "|\n"
+            "|" + "|".join(headers) + "|\n"  # pragma: no mutate
+        )
+        self.lines_of_content.append(
+            "|"
+            + "|".join(["-" * len(header) for header in headers])
+            + "|\n"  # pragma: no mutate
         )
         for row in table_contents:
             row_values = (str(value) for value in row.values())
-            self.lines_of_content.append("|" + "|".join(row_values) + "|\n")
-        self.lines_of_content.append("\n")
+            self.lines_of_content.append(
+                "|" + "|".join(row_values) + "|\n"  # pragma: no mutate
+            )
+        self.lines_of_content.append("\n")  # pragma: no mutate

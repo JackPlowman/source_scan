@@ -1,5 +1,5 @@
 [project]
-name = "source-scan"
+name = "scanner"
 dynamic = ["version"]
 requires-python = ">=3.13"
 dependencies = ["structlog==25.3.0", "pygithub==2.6.1"]
@@ -88,5 +88,6 @@ ignore_names = [
 ]
 
 [tool.mutmut]
-paths_to_mutate = ["scanner/", "scanner/utils/"]
-tests_dir = ["scanner/", "scanner/utils/"]
+debug = true
+paths_to_mutate = ["scanner"]
+do_not_mutate = ["test_*.py", "__init__.py"]

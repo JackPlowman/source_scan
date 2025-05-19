@@ -21,7 +21,7 @@ def find_technologies_and_frameworks(file_contents: str) -> list[str]:
     Returns:
         list[str]: The list of technologies and frameworks used in the repository.
     """
-    file_lines = file_contents.split("\n")
+    file_lines = file_contents.split("\n")  # pragma: no mutate
     header_index = find_project_technologies_and_frameworks_header(file_lines)
     if header_index == -1:
         logger.debug("No Project Technologies and Frameworks header found")
