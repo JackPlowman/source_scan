@@ -147,3 +147,19 @@ jobs:
           persist-credentials: false
       - name: "Run CodeLimit"
         uses: getcodelimit/codelimit-action@a036c6897be9ccf69cde9dfe50eafa8cd79c98f8 # v1
+
+  mutation-tests:
+    name: Run Mutation Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Setup Python Dependencies
+        uses: ./.github/actions/setup-dependencies
+        with:
+          install-all-dependencies: "true"
+      - name: Run Mutation Tests
+        run: just mutmut-run
