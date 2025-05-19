@@ -2,9 +2,9 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from source_scan.scanner.app import generate_tech_report, summarise_tech_report
+from scanner.app import generate_tech_report, summarise_tech_report
 
-FILE_PATH = "source_scan.scanner.app"
+FILE_PATH = "scanner.app"
 
 
 @patch(f"{FILE_PATH}.summarise_tech_report")
