@@ -42,7 +42,7 @@ ignore = [
   "D104",    # Ignore missing docstring in public package
   "D100",    # Ignore missing docstring in public module
   "SIM112",  # Ignore Lowercase environment variables (used for GitHub actions)
-  "N999",  # Ignore upstream folder names
+  "N999",    # Ignore upstream folder names
 ]
 
 fixable = ["ALL"]
@@ -90,4 +90,4 @@ ignore_names = [
 [tool.mutmut]
 paths_to_mutate = ["scanner"]
 tests_dir = ["scanner/tests", "scanner/utils/tests"]
-do_not_mutate = ["test_*.py", "__init__.py", "conftest.py"]
+do_not_mutate = ["*/tests/test_*.py", "test_*.py", "__init__.py", "conftest.py"]
