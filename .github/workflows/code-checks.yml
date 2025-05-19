@@ -161,5 +161,7 @@ jobs:
         uses: ./.github/actions/setup-dependencies
         with:
           install-all-dependencies: "true"
+      - name: Remove Test Directory
+        run: rm -rf tests
       - name: Run Mutation Tests
         run: uv run mutmut run
