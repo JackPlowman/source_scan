@@ -88,7 +88,6 @@ ignore_names = [
 ]
 
 [tool.mutmut]
-debug = true
 paths_to_mutate = ["scanner"]
 tests_dir = ["scanner/tests", "scanner/utils/tests"]
 do_not_mutate = ["test_*.py", "__init__.py"]
