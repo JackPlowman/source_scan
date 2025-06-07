@@ -12,6 +12,6 @@ jobs:
     name: Clean Caches
     permissions:
       contents: read
-    uses: JackPlowman/reusable-workflows/.github/workflows/common-clean-caches.yml@eb21b6a4feabfb3a7e88690281dfc7280e9806f8 # v2025.05.18.01
+    uses: JackPlowman/reusable-workflows/.github/workflows/common-clean-caches.yml@5449fecafeab1261b3267ab11f076ff5ed3bd935 # v2025.06.06.01
     secrets:
       workflow_github_token: ${{ secrets.GH_TOKEN }}
