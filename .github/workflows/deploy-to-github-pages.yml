@@ -133,7 +133,9 @@ jobs:
           install-all-dependencies: true
           install-browsers: true
       - name: Run UI Tests
-        run: just ui-tests-ci ${{ matrix.browser }}
+        run: just ui-tests-ci "$BROWSER"
+        env:
+          BROWSER: ${{ matrix.browser }}
 
   link-tests:
     name: Link Tests
