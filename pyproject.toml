@@ -5,25 +5,19 @@ requires-python = "~=3.13"
 dependencies = ["structlog==25.3.0", "pygithub==2.6.1"]
 
 [project.optional-dependencies]
-dev = [
-  "pytest==8.3.5",
-  "pytest-cov==6.1.1",
-  "ruff==0.11.10",
-  "vulture==2.14",
-  "mutmut==3.3.0",
-]
-diagrams = ["diagrams==0.24.4", "ruff==0.11.10"]
+dev = ["pytest==8.4.0", "pytest-cov==6.1.1", "ruff==0.11.13", "vulture==2.14"]
+diagrams = ["diagrams==0.24.4", "ruff==0.11.13"]
 test = [
-  "pytest==8.3.5",
+  "pytest==8.4.0",
   "markdown2==2.5.3",
   "beautifulsoup4==4.13.3",
   "playwright==1.52.0",
   "pytest-playwright==0.7.0",
-  "pytest-rerunfailures==15.0",
+  "pytest-rerunfailures==15.1",
 ]
 
 [tool.uv]
-required-version = "0.7.5"
+required-version = "0.7.12"
 package = false
 
 [tool.setuptools]
@@ -42,7 +36,7 @@ ignore = [
   "D104",    # Ignore missing docstring in public package
   "D100",    # Ignore missing docstring in public module
   "SIM112",  # Ignore Lowercase environment variables (used for GitHub actions)
-  "N999",  # Ignore upstream folder names
+  "N999",    # Ignore upstream folder names
 ]
 
 fixable = ["ALL"]
