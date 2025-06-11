@@ -161,10 +161,6 @@ lefthook-validate:
 zizmor-check:
     uvx zizmor . --persona=pedantic
 
-# Run zizmor checking with sarif output
-zizmor-check-sarif:
-    uvx zizmor . --persona=pedantic --format sarif > results.sarif
-
 # ------------------------------------------------------------------------------
 # Pinact
 # ------------------------------------------------------------------------------
