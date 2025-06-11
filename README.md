@@ -26,4 +26,4 @@ An example can be found in the [PROJECT_TECHNOLOGIES.md](docs/PROJECT_TECHNOLOGI
 
 ### C4
 
-![c4](./docs/diagrams/c4.png)
+![c4](./docs/c4.drawio.png)
