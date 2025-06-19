@@ -18,10 +18,6 @@ run:
 run-with-defaults:
     DEBUG=true GITHUB_REPOSITORY_OWNER=JackPlowman just run
 
-# Check UV lock
-uv-lock-check:
-    uv lock --check
-
 # ------------------------------------------------------------------------------
 # Test Commands
 # ------------------------------------------------------------------------------
@@ -33,10 +29,6 @@ unit-test:
 # Runs unit tests with debug
 unit-test-debug:
     uv run pytest scanner --cov=. --cov-report=xml -vv
-
-# Mutation tests
-mutmut-run:
-    uv run mutmut run
 
 # Run markdown tests
 markdown-test:
@@ -77,7 +69,6 @@ clean:
 
 # ------------------------------------------------------------------------------
 # Ruff - Python Linting and Formatting
-# Set up ty when it's ready
 # ------------------------------------------------------------------------------
 
 # Fix all Ruff issues
@@ -85,12 +76,13 @@ ruff-fix:
     just ruff-format-fix
     just ruff-lint-fix
 
-# Run all ruff checks
+# Check for all Ruff issues
 ruff-checks:
-    just ruff-lint ruff-format
+    just ruff-format-check
+    just ruff-lint-check
 
 # Check for Ruff issues
-ruff-lint:
+ruff-lint-check:
     uv run ruff check .
 
 # Fix Ruff lint issues
@@ -98,12 +90,20 @@ ruff-lint-fix:
     uv run ruff check . --fix
 
 # Check for Ruff format issues
-ruff-format:
+ruff-format-check:
     uv run ruff format --check .
 
 # Fix Ruff format issues
 ruff-format-fix:
     uv run ruff format .
+
+# ------------------------------------------------------------------------------
+# Ty - Python Type Checking
+# ------------------------------------------------------------------------------
+
+# Check for type issues with Ty
+ty-check:
+    uv run ty check .
 
 # ------------------------------------------------------------------------------
 # Other Python Tools
@@ -112,6 +112,9 @@ ruff-format-fix:
 # Check for unused code
 vulture:
     uv run vulture scanner
+
+uv-lock-check:
+    uv lock --check
 
 # ------------------------------------------------------------------------------
 # Prettier
