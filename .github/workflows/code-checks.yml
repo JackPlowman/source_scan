@@ -65,6 +65,8 @@ jobs:
           persist-credentials: false
       - name: Set up dependencies
         uses: ./.github/actions/setup-dependencies
+        with:
+          install-all-dependencies: "true"
       - name: Generate Ruff Sarif
         run: just ruff-lint-check
         env:
@@ -92,6 +94,8 @@ jobs:
           persist-credentials: false
       - name: Set up dependencies
         uses: ./.github/actions/setup-dependencies
+        with:
+          install-all-dependencies: "true"
       - name: Check Python Code Format (Ruff)
         run: just ruff-format-check
         env:
@@ -108,6 +112,8 @@ jobs:
           persist-credentials: false
       - name: Set up dependencies
         uses: ./.github/actions/setup-dependencies
+        with:
+          install-all-dependencies: "true"
       - name: Check Python Code Types (ty) Checks
         run: just ty-check
 
@@ -125,6 +131,8 @@ jobs:
           persist-credentials: false
       - name: Set up dependencies
         uses: ./.github/actions/setup-dependencies
+        with:
+          install-all-dependencies: "true"
       - name: Check Python Code for Dead Code (Vulture)
         run: just vulture
 
@@ -142,6 +150,8 @@ jobs:
           persist-credentials: false
       - name: Set up dependencies
         uses: ./.github/actions/setup-dependencies
+        with:
+          install-all-dependencies: "true"
       - name: Check UV Lockfile
         run: just uv-lock-check
 
