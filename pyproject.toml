@@ -6,20 +6,20 @@ dependencies = ["structlog==25.4.0", "pygithub==2.6.1"]
 
 [project.optional-dependencies]
 dev = [
-  "beautifulsoup4==4.13.3",
+  "beautifulsoup4==4.13.4",
   "markdown2==2.5.3",
-  "playwright==1.52.0",
+  "playwright==1.53.0",
   "pytest-cov==6.2.1",
   "pytest-playwright==0.7.0",
   "pytest-rerunfailures==15.1",
-  "pytest==8.4.0",
-  "ruff==0.12.0",
+  "pytest==8.4.1",
+  "ruff==0.12.1",
   "vulture==2.14",
-  "ty==0.0.1a11",
+  "ty==0.0.1a12",
 ]
 
 [tool.uv]
-required-version = "0.7.13"
+required-version = "0.7.16"
 package = false
 
 [tool.setuptools]
