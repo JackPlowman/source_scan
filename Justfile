@@ -105,6 +105,10 @@ ruff-format-fix:
 ty-check:
     uv run ty check .
 
+# Run Ty check without erroring
+ty-check-exit-zero:
+    uv run ty check . --exit-zero
+
 # ------------------------------------------------------------------------------
 # Other Python Tools
 # ------------------------------------------------------------------------------
