@@ -13,13 +13,13 @@ dev = [
   "pytest-playwright==0.7.0",
   "pytest-rerunfailures==15.1",
   "pytest==8.4.1",
-  "ruff==0.12.1",
+  "ruff==0.12.3",
   "vulture==2.14",
-  "ty==0.0.1a12",
+  "ty==0.0.1a14",
 ]
 
 [tool.uv]
-required-version = "0.7.16"
+required-version = "0.7.20"
 package = false
 
 [tool.setuptools]
