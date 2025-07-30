@@ -22,5 +22,7 @@ pre-commit:
       run: just ruff-checks
     Pinact Checks:
       run: just pinact-check
+    Actionlint Checks:
+      run: just actionlint-check
     UV Lock Check:
       run: just uv-lock-check
