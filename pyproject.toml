@@ -7,15 +7,15 @@ dependencies = ["structlog==25.4.0", "pygithub==2.6.1"]
 [project.optional-dependencies]
 dev = [
   "beautifulsoup4==4.13.4",
-  "markdown2==2.5.3",
+  "markdown2==2.5.4",
   "playwright==1.54.0",
   "pytest-cov==6.2.1",
   "pytest-playwright==0.7.0",
   "pytest-rerunfailures==15.1",
   "pytest==8.4.1",
-  "ruff==0.12.5",
+  "ruff==0.12.7",
   "vulture==2.14",
-  "ty==0.0.1a15",
+  "ty==0.0.1a16",
 ]
 
 [tool.uv]
