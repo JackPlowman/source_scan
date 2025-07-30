@@ -35,6 +35,7 @@ jobs:
           GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
           FORCE_COLOR: true
           DEBUG: ${{ inputs.scanner_debug }}
+          CI: true
       - name: Upload Scanner Results
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
