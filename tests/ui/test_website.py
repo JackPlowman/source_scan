@@ -62,4 +62,4 @@ def test_repositories_table(page: Page) -> None:
         "Project Name",
         "Technologies And Frameworks",
     ]
-    assert repositories_table.locator("tr").count() == 35
+    assert repositories_table.locator("tr").count() == 36
