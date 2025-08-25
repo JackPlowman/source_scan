@@ -18,7 +18,6 @@ updates:
         patterns:
           - "*"
         exclude-patterns:
-          - "super-linter/super-linter"
           - "JackPlowman/reusable-workflows"
         update-types:
           - "patch"
