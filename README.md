@@ -1,6 +1,6 @@
 # Source Scan
 
-![Maintenance](https://img.shields.io/badge/Maintenance-8A2BE2?style=for-the-badge&color=19e650&label=Status)
+![Deprecated](https://img.shields.io/badge/Deprecated-8A2BE2?style=for-the-badge&color=ff0000&label=Status)
 
 Source Scan is a tool that scans a project's source code and generates a report of the technologies and frameworks used in the project. The report is generated in Markdown and can be used to document the owners technologies used in their projects.
 
