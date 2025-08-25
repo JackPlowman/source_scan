@@ -1,8 +1,0 @@
-extends: default
-
-rules:
-  document-start: disable
-  truthy: disable
-  line-length: disable
-  comments:
-    min-spaces-from-content: 1
